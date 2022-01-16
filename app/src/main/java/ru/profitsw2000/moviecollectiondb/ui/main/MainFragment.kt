@@ -65,7 +65,15 @@ class MainFragment : Fragment() {
     }
 
     private fun setData(movie: Movie) = with(binding) {
-
+        title.text = movie.title
+        appCompatImageView.setImageResource(movie.picture)
+        genre.text = movie.genre
+        duration.text = movie.duration.toString() + " мин."
+        rating.text = movie.rating.toString()
+        budget.text = movie.budget.toString() + " $"
+        revenue.text = movie.revenue.toString() + " $"
+        releaseDate.text = movie.releaseDate
+        description.text = movie.description
     }
 
     companion object {
