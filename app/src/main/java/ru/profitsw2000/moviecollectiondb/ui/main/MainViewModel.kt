@@ -23,6 +23,7 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
             if (randomNumber < 4) {
                 liveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
             } else {
+                liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
             }
         }.start()
     }

@@ -209,7 +209,7 @@
 
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/weatherGroup"
+        android:id="@+id/movieDescriptionGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
