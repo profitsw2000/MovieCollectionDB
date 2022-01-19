@@ -21,7 +21,7 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
         Thread {
             sleep(3000)
             if (randomNumber < 4) {
-                liveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
+                liveData.postValue(AppState.Success(repository.getMoviesFromLocalStorage()))
             } else {
                 liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
             }
