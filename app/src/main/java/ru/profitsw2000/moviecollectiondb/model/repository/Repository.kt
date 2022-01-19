@@ -4,5 +4,5 @@ import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 
 interface Repository {
     fun getMovieFromServer(): Movie
-    fun getMovieFromLocalStorage(): Movie
+    fun getMoviesFromLocalStorage(): List<Movie>
 }
