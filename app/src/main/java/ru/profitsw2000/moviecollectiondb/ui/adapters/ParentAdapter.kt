@@ -11,6 +11,8 @@ import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
 class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClickListener)
     : RecyclerView.Adapter<ParentAdapter.MainViewHolder>() {
+
+    private val viewPool = RecyclerView.RecycledViewPool()
     private var moviesData: List<Movie> = listOf()
     private lateinit var binding: FragmentMainRecyclerItemBinding
 
