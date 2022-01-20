@@ -3,9 +3,12 @@ package ru.profitsw2000.moviecollectiondb.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.databinding.FragmentMainRecyclerItemBinding
 import ru.profitsw2000.moviecollectiondb.databinding.HorizontalRecyclerItemBinding
+import ru.profitsw2000.moviecollectiondb.model.representation.Category
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
@@ -15,10 +18,17 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
     private lateinit var binding: HorizontalRecyclerItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        binding = HorizontalRecyclerItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return ViewHolder(binding.root)
+    }
+
+/*    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v =  LayoutInflater.from(parent.context)
             .inflate(R.layout.horizontal_recycler_item,parent,false)
         return ViewHolder(v)
-    }
+    }*/
 
     override fun getItemCount(): Int {
         return movies.size
@@ -26,8 +36,13 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
-/*        holder.imageView.setImageResource(child.image)
-        holder.textView.text = movie.title*/
+        holder.bind(movie)
+/*        val movie = movies[position]
+        holder.image.setImageResource(movie.picture)
+        holder.horizontalRecyclerItemTextView.text = movie.title*/
+        with(binding) {
+            root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
+        }
     }
 
 
@@ -36,8 +51,15 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
         fun bind(movie: Movie) = with(binding) {
             horizontalRecyclerItemTextView.text = movie.title
             movieDescriptionImage.setImageResource(movie.picture)
-            root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
+/*            movieRecyclerView.apply {
+                layoutManager = LinearLayoutManager(movieRecyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = ChildAdapter(category.movieList, itemClickListener)
+                setRecycledViewPool(viewPool)
+            }*/
         }
-
+/*        with(binding) {
+            val titleTextView : TextView = movieTitle
+            val image : ImageView = movieDescriptionImage
+        }*/
     }
 }

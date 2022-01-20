@@ -13,7 +13,7 @@ import ru.profitsw2000.moviecollectiondb.model.representation.Category
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
-class ParentAdapter (private val categories: List<Category>, private val itemClickListener: MainFragment.OnItemViewClickListener)
+class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClickListener)
     : RecyclerView.Adapter<ParentAdapter.MainViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -34,10 +34,10 @@ class ParentAdapter (private val categories: List<Category>, private val itemCli
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(categories[position])
+        holder.bind(categoriesData[position])
     }
 
-    override fun getItemCount() = categories.size
+    override fun getItemCount() = categoriesData.size
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(category: Category) = with(binding) {

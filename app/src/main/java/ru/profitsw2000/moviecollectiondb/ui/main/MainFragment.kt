@@ -13,6 +13,7 @@ import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.model.Factory.CategoriesFactory
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
 
@@ -66,7 +67,7 @@ class MainFragment : Fragment() {
                         }*/
                     }
                 }).apply {
-                    setMovie(appState.moviesData)
+                    setCategories(appState.categoriesData)
                 }
                 mainFragmentRecyclerView.adapter = adapter
             }
