@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentMainRecyclerItemBinding
 import ru.profitsw2000.moviecollectiondb.model.representation.Category
@@ -38,9 +41,12 @@ class ParentAdapter (private val categories: List<Category>, private val itemCli
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(category: Category) = with(binding) {
-/*            mainFragmentRecyclerItemTextView.text = movie.title
-            movieDescriptionImage.setImageResource(movie.picture)
-            root.setOnClickListener { itemClickListener.onItemViewClick(movie) }*/
+            categoryTitle.text = category.title
+            movieRecyclerView.apply {
+                layoutManager = LinearLayoutManager(movieRecyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = ChildAdapter(category.movieList, itemClickListener)
+                setRecycledViewPool(viewPool)
+            }
         }
     }
 }
