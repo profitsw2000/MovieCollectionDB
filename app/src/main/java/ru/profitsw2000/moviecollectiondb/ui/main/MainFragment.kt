@@ -54,17 +54,17 @@ class MainFragment : Fragment() {
                 progressBar.visibility = View.GONE
                 adapter = ParentAdapter(object : OnItemViewClickListener {
                     override fun onItemViewClick(movie: Movie) {
-                        Toast.makeText(activity,"Clicked!!!", Toast.LENGTH_LONG).show()
-/*                        val manager = activity?.supportFragmentManager
+                        //Toast.makeText(activity,"Clicked!!!", Toast.LENGTH_LONG).show()
+                        val manager = activity?.supportFragmentManager
                         manager?.let { manager ->
                             val bundle = Bundle().apply {
-                                //putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
+                                putParcelable(DescriptionFragment.BUNDLE_EXTRA, movie)
                             }
                             manager.beginTransaction()
-                                .add(R.id.container, DescriptionFragment.newInstance(bundle))
+                                .replace(R.id.container, DescriptionFragment.newInstance(bundle))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()
-                        }*/
+                        }
                     }
                 }).apply {
                     setCategories(appState.categoriesData)

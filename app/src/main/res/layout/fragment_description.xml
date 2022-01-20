@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
@@ -215,7 +215,6 @@
         android:id="@+id/movieDescriptionGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         tools:visibility="visible"
         app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
         duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
