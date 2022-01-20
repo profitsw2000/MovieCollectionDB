@@ -37,9 +37,6 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
-/*        val movie = movies[position]
-        holder.image.setImageResource(movie.picture)
-        holder.horizontalRecyclerItemTextView.text = movie.title*/
         with(binding) {
             root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
         }
@@ -51,15 +48,6 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
         fun bind(movie: Movie) = with(binding) {
             horizontalRecyclerItemTextView.text = movie.title
             movieDescriptionImage.setImageResource(movie.picture)
-/*            movieRecyclerView.apply {
-                layoutManager = LinearLayoutManager(movieRecyclerView.context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = ChildAdapter(category.movieList, itemClickListener)
-                setRecycledViewPool(viewPool)
-            }*/
         }
-/*        with(binding) {
-            val titleTextView : TextView = movieTitle
-            val image : ImageView = movieDescriptionImage
-        }*/
     }
 }
