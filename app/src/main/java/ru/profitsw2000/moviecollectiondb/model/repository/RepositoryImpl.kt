@@ -11,5 +11,5 @@ import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 class RepositoryImpl : Repository {
     override fun getMovieFromServer() = Movie()
     override fun getMoviesFromLocalStorage() = getMovies(20)
-    override fun getCategoriesFromLocalStorage() = getCategories(5)
+    override fun getCategoriesFromLocalStorage() = getCategories(20)
 }

@@ -37,17 +37,14 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
-        with(binding) {
-            root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
-        }
     }
 
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-
         fun bind(movie: Movie) = with(binding) {
             horizontalRecyclerItemTextView.text = movie.title
             movieDescriptionImage.setImageResource(movie.picture)
+            root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
         }
     }
 }
