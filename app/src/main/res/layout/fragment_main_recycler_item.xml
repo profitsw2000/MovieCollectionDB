@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="2dp"
+    android:layout_margin="@dimen/card_view_margin"
     card_view:cardBackgroundColor="#fff"
-    card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="@dimen/card_view_corner_radius"
+    card_view:cardElevation="@dimen/card_elevation"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/movieRecyclerView"
-            android:padding="20dp"
+            android:padding="@dimen/card_category_text_padding"
             android:text="Hello World"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:padding="20dp"
-            android:layout_marginTop="30dp"
+            android:padding="@dimen/card_recycler_view_padding"
+            android:layout_marginTop="@dimen/card_recycler_margin_top"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="74dp" />
     </RelativeLayout>
