@@ -49,10 +49,9 @@ class MainFragment : Fragment() {
     private fun renderData(appState: AppState) = with(binding) {
         when (appState) {
             is AppState.Success -> {
-                progressBar.visibility = View.GONE
+                progressBar.hide()
                 adapter = ParentAdapter(object : OnItemViewClickListener {
                     override fun onItemViewClick(movie: Movie) {
-                        //Toast.makeText(activity,"Clicked!!!", Toast.LENGTH_LONG).show()
                         val manager = activity?.supportFragmentManager
                         manager?.let { manager ->
                             val bundle = Bundle().apply {
@@ -68,13 +67,16 @@ class MainFragment : Fragment() {
                     setCategories(appState.categoriesData)
                 }
                 mainFragmentRecyclerView.adapter = adapter
+                mainFragmentRecyclerView.show()
             }
             is AppState.Loading -> {
-                progressBar.visibility = View.VISIBLE
+                mainFragmentRecyclerView.hide()
+                progressBar.show()
             }
             is AppState.Error -> {
                 val message = appState.message
-                progressBar.visibility = View.GONE
+                progressBar.hide()
+                mainFragmentRecyclerView.hide()
                 main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovie() }, Snackbar.LENGTH_INDEFINITE)
             }
         }
@@ -87,6 +89,20 @@ class MainFragment : Fragment() {
         length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
         Snackbar.make(this, text, length).setAction(actionText, action).show()
+    }
+
+    fun View.show() : View {
+        if (visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+        }
+        return this
+    }
+
+    fun View.hide() : View {
+        if (visibility != View.GONE) {
+            visibility = View.GONE
+        }
+        return this
     }
 
     interface OnItemViewClickListener {
