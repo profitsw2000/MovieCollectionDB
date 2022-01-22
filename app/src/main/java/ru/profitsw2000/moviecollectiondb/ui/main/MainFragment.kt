@@ -79,7 +79,7 @@ class MainFragment : Fragment() {
                 progressBar.visibility = View.GONE
                 Snackbar
                     .make(main, message, Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") { viewModel.getMovie() }
+                    .setAction(getString(R.string.snack_bar_reload)) { viewModel.getMovie() }
                     .show()
             }
         }
