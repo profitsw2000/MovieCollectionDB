@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import ru.profitsw2000.moviecollectiondb.databinding.MainFragmentBinding
@@ -13,7 +12,6 @@ import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
-import ru.profitsw2000.moviecollectiondb.model.Factory.CategoriesFactory
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
 
@@ -77,12 +75,18 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 val message = appState.message
                 progressBar.visibility = View.GONE
-                Snackbar
-                    .make(main, message, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(R.string.snack_bar_reload)) { viewModel.getMovie() }
-                    .show()
+                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovie() }, Snackbar.LENGTH_INDEFINITE)
             }
         }
+    }
+
+    private fun View.showSnackBar (
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 
     interface OnItemViewClickListener {
