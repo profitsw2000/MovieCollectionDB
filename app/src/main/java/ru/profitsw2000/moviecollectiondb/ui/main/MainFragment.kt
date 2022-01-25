@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
         }
         val observer = Observer<AppState> { renderData(it) }
         viewModel.getLiveData().observe(viewLifecycleOwner, observer)
-        viewModel.getMovie()
+        viewModel.getMovieInfo()
     }
 
     override fun onDestroyView() {
