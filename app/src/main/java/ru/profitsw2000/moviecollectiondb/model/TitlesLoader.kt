@@ -3,7 +3,7 @@ package ru.profitsw2000.moviecollectiondb.model
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
-import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.GenresDTO
+import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DiscoverDTO
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.MalformedURLException
@@ -11,9 +11,9 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
-object GenresLoader {
+object TitlesLoader {
 
-    fun loadGenres(request: String): GenresDTO? {
+    fun loadTitles(request: String): DiscoverDTO? {
         try {
             val uri = URL(request)
 
@@ -30,7 +30,7 @@ object GenresLoader {
                     getLines(bufferedReader)
                 }
 
-                return Gson().fromJson(lines, GenresDTO::class.java)
+                return Gson().fromJson(lines, DiscoverDTO::class.java)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
