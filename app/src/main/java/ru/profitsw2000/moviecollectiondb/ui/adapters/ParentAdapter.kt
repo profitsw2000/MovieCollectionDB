@@ -38,7 +38,14 @@ class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClick
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(categoriesData[position])
-        Log.d(MY_LOG, position.toString())
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return categoriesData[position].id.toLong()
     }
 
     override fun getItemCount() = categoriesData.size
@@ -46,7 +53,6 @@ class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClick
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(category: Category) = with(binding) {
             categoryTitle.text = category.title
-            Log.d(MY_LOG, category.title)
             movieRecyclerView.apply {
                 layoutManager = LinearLayoutManager(movieRecyclerView.context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = ChildAdapter(category.movieList, itemClickListener)

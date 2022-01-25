@@ -35,7 +35,13 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
 
         liveData.value = AppState.Loading
         Thread {
-            liveData.postValue(AppState.Success(repository.getCategoriesFromServer(request)))
+            val categories = repository.getCategoriesFromServer(request)
+
+            if (categories != null) {
+                liveData.postValue(AppState.Success(categories))
+            } else {
+                liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
+            }
         }.start()
     }
 
