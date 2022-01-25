@@ -3,6 +3,7 @@ package ru.profitsw2000.moviecollectiondb.model
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
+import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.GenresDTO
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.MalformedURLException
@@ -10,9 +11,9 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
-class DTOLoader<T> {
+object GenresLoader {
 
-    inline fun <reified T> loadDTO(request: String): T? {
+    fun loadGenres(request: String): GenresDTO? {
         try {
             val uri = URL(request)
 
@@ -29,7 +30,7 @@ class DTOLoader<T> {
                     getLines(bufferedReader)
                 }
 
-                return Gson().fromJson(lines, T::class.java)
+                return Gson().fromJson(lines, GenresDTO::class.java)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -42,7 +43,7 @@ class DTOLoader<T> {
         return null
     }
 
-    fun getLinesForOld(reader: BufferedReader): String {
+    private fun getLinesForOld(reader: BufferedReader): String {
         val rawData = StringBuilder(1024)
         var tempVariable: String?
 
@@ -55,7 +56,7 @@ class DTOLoader<T> {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun getLines(reader: BufferedReader): String {
+    private fun getLines(reader: BufferedReader): String {
         return reader.lines().collect(Collectors.joining("\n"))
     }
 }
