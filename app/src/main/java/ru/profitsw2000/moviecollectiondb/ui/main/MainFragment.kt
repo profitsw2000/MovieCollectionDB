@@ -77,7 +77,7 @@ class MainFragment : Fragment() {
                 val message = appState.message
                 progressBar.hide()
                 mainFragmentRecyclerView.hide()
-                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovie() }, Snackbar.LENGTH_INDEFINITE)
+                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieInfo() }, Snackbar.LENGTH_INDEFINITE)
             }
         }
     }
