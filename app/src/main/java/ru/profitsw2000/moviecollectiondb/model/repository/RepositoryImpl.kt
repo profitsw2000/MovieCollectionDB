@@ -11,7 +11,6 @@ import ru.profitsw2000.moviecollectiondb.model.representation.Movie
  *
  */
 class RepositoryImpl : Repository {
-    val API_KEY = "c653b216d7d09c4aa4176e651f1ac4dd"
 
     override fun getMoviesFromServer(request: String): List<Movie> {
 
