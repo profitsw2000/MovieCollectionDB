@@ -28,6 +28,10 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
         return movies.size
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)

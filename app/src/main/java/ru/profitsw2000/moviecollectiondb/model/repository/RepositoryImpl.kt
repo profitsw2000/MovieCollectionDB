@@ -34,7 +34,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun getCategoriesFromServer(request: String): List<Category> {
-        val requestMovieList = "api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
+        val requestMovieList = "https://api.themoviedb.org/3/discover/movie?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
         var categories: ArrayList<Category> = arrayListOf()
         val dto = GenresLoader.loadGenres(request)
 
@@ -46,7 +46,7 @@ class RepositoryImpl : Repository {
                 while (i > 0) {
                     val id = dto.genres?.get(j)?.id ?: 0
                     val moviesList = getMoviesFromServer(requestMovieList + id.toString())
-                    if (moviesList != null) {
+                    if (moviesList != null && moviesList.isNotEmpty()) {
                         categories.add(Category(
                             dto.genres?.get(j)?.id ?: 0,dto.genres?.get(j)?.name ?: "Неизвестно",
                             moviesList))
