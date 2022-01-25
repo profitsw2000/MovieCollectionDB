@@ -14,6 +14,8 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
 
     fun getMovie() = getDataFromLocalSource()
 
+    fun getMovieInfo() = getDataFromServer()
+
     private fun getDataFromLocalSource() {
         val randomNumber = (0..5).random()
 
@@ -25,6 +27,15 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
             } else {
                 liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
             }
+        }.start()
+    }
+
+    private fun getDataFromServer() {
+        val request = "https://api.themoviedb.org/3/genre/movie/list?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru"
+
+        liveData.value = AppState.Loading
+        Thread {
+            liveData.postValue(AppState.Success(repository.getCategoriesFromServer(request)))
         }.start()
     }
 
