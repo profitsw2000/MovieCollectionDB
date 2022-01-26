@@ -1,8 +1,11 @@
 package ru.profitsw2000.moviecollectiondb.model.representation
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import ru.profitsw2000.moviecollectiondb.R
 import java.util.*
 
+@Parcelize
 data class Movie(
     val title: String = "Никто",
     val genre: String = "боевик, триллер",
@@ -21,4 +24,5 @@ data class Movie(
             " в больницу, но оказывается, что один из пострадавших — брат " +
             "влиятельного русского бандита. И он теперь жаждет мести.",
     val picture: Int = R.drawable.film
-)
+) : Parcelable
+
