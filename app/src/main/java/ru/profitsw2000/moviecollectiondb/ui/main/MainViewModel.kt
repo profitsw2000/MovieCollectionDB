@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.profitsw2000.moviecollectiondb.model.AppState
+import ru.profitsw2000.moviecollectiondb.model.Requests.RequestGenerator
 import ru.profitsw2000.moviecollectiondb.model.repository.Repository
 import java.lang.Thread.sleep
 
@@ -31,7 +32,7 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
     }
 
     private fun getDataFromServer() {
-        val request = "https://api.themoviedb.org/3/genre/movie/list?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru"
+        val request = RequestGenerator.getGenresListRQ()
 
         liveData.value = AppState.Loading
         Thread {

@@ -5,6 +5,7 @@ import ru.profitsw2000.moviecollectiondb.model.Factory.CategoriesFactory.getCate
 import ru.profitsw2000.moviecollectiondb.model.Factory.MoviesFactory.getMovies
 import ru.profitsw2000.moviecollectiondb.model.GenresLoader
 import ru.profitsw2000.moviecollectiondb.model.MovieLoader
+import ru.profitsw2000.moviecollectiondb.model.Requests.RequestGenerator
 import ru.profitsw2000.moviecollectiondb.model.TitlesLoader
 import ru.profitsw2000.moviecollectiondb.model.representation.Category
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
@@ -15,9 +16,8 @@ import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 class RepositoryImpl : Repository {
 
     override fun getMovieFromServer(id: Int): Movie {
-        val requestMovieInfo = "https://api.themoviedb.org/3/movie/" +
-                id.toString() + "?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru"
-        val dto = MovieLoader.loadMovie(requestMovieInfo)
+
+        val dto = MovieLoader.loadMovie(RequestGenerator.getMovieInfoRQ(id))
 
         if (dto != null) {
             var genresList: ArrayList<String> = arrayListOf()
@@ -70,7 +70,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun getCategoriesFromServer(request: String): List<Category> {
-        val requestMovieList = "https://api.themoviedb.org/3/discover/movie?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="
+
         var categories: ArrayList<Category> = arrayListOf()
         val dto = GenresLoader.loadGenres(request)
 
@@ -81,7 +81,7 @@ class RepositoryImpl : Repository {
                 var j = 0
                 while (i > 0) {
                     val id = dto.genres?.get(j)?.id ?: 0
-                    val moviesList = getMoviesFromServer(requestMovieList + id.toString())
+                    val moviesList = getMoviesFromServer(RequestGenerator.getMovieListByGenreRQ(id))
                     if (moviesList != null && moviesList.isNotEmpty()) {
                         categories.add(Category(
                             dto.genres?.get(j)?.id ?: 0,dto.genres?.get(j)?.name ?: "Неизвестно",

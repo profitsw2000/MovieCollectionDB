@@ -11,7 +11,7 @@ private const val REQUEST_MOVIE_PART = "movie/"
 private const val REQUEST_LANGUAGE_PART = "&language=ru"
 private const val REQUEST_API_KEY_PART = "?api_key=$API_KEY"
 
-class RequestGenerator {
+object RequestGenerator {
 
     fun getGenresListRQ(): String {
         return REQUEST_BEGIN + REQUEST_GENRE_PART + REQUEST_API_KEY_PART + REQUEST_LANGUAGE_PART
