@@ -11,5 +11,5 @@ data class DescriptionDTO(
     val revenue: Int?,
     val runtime: Int?,
     val title: String?,
-    val vote_average: Int?
+    val vote_average: Float?
 )
