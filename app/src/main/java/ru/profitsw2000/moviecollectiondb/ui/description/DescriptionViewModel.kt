@@ -12,7 +12,9 @@ class DescriptionViewModel(private val repository: Repository) : ViewModel() {
         return localLiveData
     }
 
-    fun loadData(id: Int) {
+    fun getMovieDescription(id: Int) = loadData(id)
+
+    private fun loadData(id: Int) {
         localLiveData.value = AppState.Loading
         Thread{
             val data = repository.getMovieFromServer(id)

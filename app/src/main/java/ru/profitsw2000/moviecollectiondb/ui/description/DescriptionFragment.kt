@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
+import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DescriptionFragment : Fragment() {
 
+    //import library before introduce viewModel!!!
+    private val viewModel: DescriptionViewModel by viewModel()
     //private lateinit var binding: FragmentDescriptionBinding
     private var _binding: FragmentDescriptionBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +36,34 @@ class DescriptionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
-            setData(it)
+            val id = it.id
+
+            viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
+                with(binding) {
+                when (appState) {
+                        is AppState.Error -> {
+                            val message = appState.message
+                            movieDescriptionGroup.hide()
+                            progressBar.hide()
+                            info.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieDescription(id) }, Snackbar.LENGTH_INDEFINITE)
+                        }
+                        AppState.Loading -> {
+                            movieDescriptionGroup.hide()
+                            progressBar.show()
+                        }
+                        is AppState.Success -> {
+
+                        }
+                        is AppState.MovieSuccess -> {
+                            progressBar.hide()
+                            setData(appState.movie)
+                            movieDescriptionGroup.show()
+                        }
+                    }
+
+                }
+            })
+            viewModel.getMovieDescription(id)
         }
     }
 
@@ -51,6 +84,28 @@ class DescriptionFragment : Fragment() {
         description.text = movie.description
     }
 
+    private fun View.showSnackBar (
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
+    }
+
+    private fun View.show() : View {
+        if (visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+        }
+        return this
+    }
+
+    private fun View.hide() : View {
+        if (visibility != View.GONE) {
+            visibility = View.GONE
+        }
+        return this
+    }
     companion object {
         const val BUNDLE_EXTRA = "movie"
 

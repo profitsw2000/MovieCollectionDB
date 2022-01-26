@@ -61,7 +61,7 @@ class RepositoryImpl : Repository {
             if (i != null) {
                 var j = 0
                 while (i > 0) {
-                    movies.add(Movie(title = dto.results?.get(j)?.title ?: "Неизвестно"))
+                    movies.add(Movie(title = dto.results?.get(j)?.title ?: "Неизвестно", id = dto.results?.get(j)?.id ?: 887767))
                     i--
                     j++
                 }

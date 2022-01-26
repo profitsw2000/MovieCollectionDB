@@ -69,6 +69,9 @@ class MainFragment : Fragment() {
                 mainFragmentRecyclerView.adapter = adapter
                 mainFragmentRecyclerView.show()
             }
+            is AppState.MovieSuccess ->{
+
+            }
             is AppState.Loading -> {
                 mainFragmentRecyclerView.hide()
                 progressBar.show()
