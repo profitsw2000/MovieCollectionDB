@@ -1,5 +1,8 @@
 package ru.profitsw2000.moviecollectiondb.ui.main
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -8,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
 import ru.profitsw2000.moviecollectiondb.databinding.MainFragmentBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
