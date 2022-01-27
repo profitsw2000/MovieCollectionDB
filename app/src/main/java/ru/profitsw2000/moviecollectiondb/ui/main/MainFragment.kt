@@ -1,5 +1,7 @@
 package ru.profitsw2000.moviecollectiondb.ui.main
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.receivers.ConnectivityReceiver
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
 
@@ -21,6 +24,12 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private var adapter: ParentAdapter? = null
+    private val receiver = ConnectivityReceiver()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context?.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +53,11 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDestroy() {
+        context?.unregisterReceiver(receiver)
+        super.onDestroy()
     }
 
     private fun renderData(appState: AppState) = with(binding) {
