@@ -48,7 +48,6 @@ class DescriptionFragment : Fragment() {
 
     //import library before introduce viewModel!!!
     private val viewModel: DescriptionViewModel by viewModel()
-    //private lateinit var binding: FragmentDescriptionBinding
     private var _binding: FragmentDescriptionBinding? = null
     private val binding get() = _binding!!
     private lateinit var movieBundle: Movie
@@ -76,10 +75,23 @@ class DescriptionFragment : Fragment() {
     }
 
     private fun renderData(movie: Movie) {
-        with(binding){
-            progressBar.hide()
-            setData(movie)
-            movieDescriptionGroup.show()
+        if(movie.budget == BUDGET_ERROR ||
+            movie.duration == RUNTIME_ERROR ||
+            movie.rating == VOTE_AVERAGE_ERROR ||
+            movie.revenue == REVENUE_ERROR ||
+            movie.id == ID_ERROR ||
+            movie.title == null ||
+            movie.genre == null ||
+            movie.releaseDate == null ||
+            movie.description == null
+        ) {
+            TODO(PROCESS_ERROR)
+        } else {
+            with(binding){
+                progressBar.hide()
+                setData(movie)
+                movieDescriptionGroup.show()
+            }
         }
     }
 
@@ -103,6 +115,10 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding){
+            movieDescriptionGroup.hide()
+            progressBar.show()
+        }
         movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
 
         context?.let {
@@ -110,34 +126,6 @@ class DescriptionFragment : Fragment() {
                 putExtra(MOVIE_ID_EXTRA,movieBundle.id)
             })
         }
-/*        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
-            id = it.id
-            viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
-                with(binding) {
-                when (appState) {
-                        is AppState.Error -> {
-                            val message = appState.message
-                            movieDescriptionGroup.hide()
-                            progressBar.hide()
-                            info.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieDescription(id) }, Snackbar.LENGTH_INDEFINITE)
-                        }
-                        AppState.Loading -> {
-                            movieDescriptionGroup.hide()
-                            progressBar.show()
-                        }
-                        is AppState.Success -> {
-
-                        }
-                        is AppState.MovieSuccess -> {
-                            progressBar.hide()
-                            setData(appState.movie)
-                            movieDescriptionGroup.show()
-                        }
-                    }
-
-                }
-            })
-            viewModel.getMovieDescription(id)*/
     }
 
     override fun onDestroyView() {
@@ -158,10 +146,13 @@ class DescriptionFragment : Fragment() {
         genre.text = movie.genre
         duration.text = movie.duration.toString() + " мин."
         rating.text = movie.rating.toString()
-        budget.text = movie.budget.toString() + " $"
-        revenue.text = movie.revenue.toString() + " $"
+        budget.text = String.format("%,d",movie.budget) + " $"
+        revenue.text = String.format("%,d",movie.revenue) + " $"
         releaseDate.text = movie.releaseDate
         description.text = movie.description
+
+        movieDescriptionGroup.show()
+        progressBar.hide()
     }
 
     private fun View.showSnackBar (
