@@ -12,14 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieCollectionDB">
-<!--        <receiver
-            android:name=".receivers.ConnectivityReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="" />
-            </intent-filter>
-        </receiver>-->
+        <service
+            android:name=".services.DescriptionService"
+            android:exported="false"></service>
 
         <activity
             android:name=".MainActivity"
