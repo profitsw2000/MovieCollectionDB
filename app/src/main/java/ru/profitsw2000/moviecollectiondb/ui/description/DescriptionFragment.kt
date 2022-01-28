@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +18,7 @@ import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.logger.MESSAGE
 import ru.profitsw2000.moviecollectiondb.services.DescriptionService
 import ru.profitsw2000.moviecollectiondb.services.MOVIE_ID_EXTRA
 
@@ -43,6 +45,10 @@ private const val ID_ERROR = -1
 private const val REVENUE_ERROR = -1
 private const val RUNTIME_ERROR = -1
 private const val VOTE_AVERAGE_ERROR = -1.0f
+
+private const val ACTION_SEND_MSG = "ru.profitsw2000.message.sender"
+private const val MESSAGE_NAME = "MOVIE TITLE"
+private const val FLAG_RECEIVER_INCLUDE_BACKGROUND = 0x01000000
 
 class DescriptionFragment : Fragment() {
 
@@ -102,6 +108,19 @@ class DescriptionFragment : Fragment() {
                 .registerReceiver(loadResultsReceiver,
                     IntentFilter(DESCRIPTION_INTENT_FILTER)
                 )
+        }
+        //set on click listener
+        with(binding){
+            sendBroadcastMessage.setOnClickListener{
+                if (movieBundle != null){
+                    val movieTitle = movieBundle.title
+                    val intent = Intent()
+                    intent.setAction(ACTION_SEND_MSG)
+                    intent.putExtra(MESSAGE_NAME,movieTitle)
+                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+                    activity?.sendBroadcast(intent)
+                }
+            }
         }
     }
 
