@@ -19,8 +19,7 @@ android {
 
     buildTypes.each {
         Properties properties = new Properties()
-        properties.load(project.rootProject.file("apikey.properties").newDataInputStream
-                ())
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
         def apiKey = properties.getProperty("the_movie_data_base_api_key", "")
         it.buildConfigField "String", "MOVIE_API_KEY", apiKey
     }

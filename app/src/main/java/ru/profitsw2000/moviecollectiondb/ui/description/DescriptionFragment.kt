@@ -109,19 +109,6 @@ class DescriptionFragment : Fragment() {
                     IntentFilter(DESCRIPTION_INTENT_FILTER)
                 )
         }
-        //set on click listener
-        with(binding){
-            sendBroadcastMessage.setOnClickListener{
-                if (movieBundle != null){
-                    val movieTitle = movieBundle.title
-                    val intent = Intent()
-                    intent.setAction(ACTION_SEND_MSG)
-                    intent.putExtra(MESSAGE_NAME,movieTitle)
-                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
-                    activity?.sendBroadcast(intent)
-                }
-            }
-        }
     }
 
     override fun onCreateView(
@@ -137,7 +124,18 @@ class DescriptionFragment : Fragment() {
         with(binding){
             movieDescriptionGroup.hide()
             progressBar.show()
+            sendBroadcastMessage.setOnClickListener{
+                if (movieBundle != null){
+                    val movieTitle = movieBundle.title
+                    val intent = Intent()
+                    intent.setAction(ACTION_SEND_MSG)
+                    intent.putExtra(MESSAGE_NAME,movieTitle)
+                    intent.addFlags(FLAG_RECEIVER_INCLUDE_BACKGROUND)
+                    activity?.sendBroadcast(intent)
+                }
+            }
         }
+
         movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
 
         context?.let {
