@@ -10,14 +10,16 @@ import ru.profitsw2000.moviecollectiondb.BuildConfig
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
 
 class RemoteDataSource {
+
     private val movieAPI = Retrofit.Builder()
         .baseUrl("https://api.weather.yandex.ru/")
         .addConverterFactory(GsonConverterFactory.create(
             GsonBuilder().setLenient().create()
             )
-        )
-        .build().create(MovieAPI::class.java)
-    fun getMovieDescription(id: Int, apiKey: String, language: String, callback: Callback<DescriptionDTO>) {
-        movieAPI.getMovie(id, BuildConfig.MOVIE_API_KEY, language).enqueue(callback)
+        ).build().create(MovieAPI::class.java)
+
+    fun getMovieDescription(id: Int, callback: Callback<DescriptionDTO>) {
+        movieAPI.getMovie(id, BuildConfig.MOVIE_API_KEY, "ru").enqueue(callback)
     }
+
 }
