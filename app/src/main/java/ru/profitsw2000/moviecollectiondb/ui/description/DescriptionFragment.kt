@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import coil.api.load
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import ru.profitsw2000.moviecollectiondb.R
@@ -121,7 +122,7 @@ class DescriptionFragment : Fragment() {
         val path = "https://image.tmdb.org/t/p/original/" + (movie.poster_path)
 
         title.text = movie.title
-        Picasso.get().load(path).into(appCompatImageView)
+        appCompatImageView.load(path)
         genre.text = movie.genre
         duration.text = movie.duration.toString() + " мин."
         rating.text = movie.rating.toString()
