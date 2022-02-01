@@ -85,12 +85,7 @@ class DescriptionFragment : Fragment() {
             movie.duration == RUNTIME_ERROR ||
             movie.rating == VOTE_AVERAGE_ERROR ||
             movie.revenue == REVENUE_ERROR ||
-            movie.id == ID_ERROR ||
-            movie.title == null ||
-            movie.genre == null ||
-            movie.releaseDate == null ||
-            movie.description == null
-        ) {
+            movie.id == ID_ERROR) {
             TODO(PROCESS_ERROR)
         } else {
             with(binding){
@@ -125,14 +120,12 @@ class DescriptionFragment : Fragment() {
             movieDescriptionGroup.hide()
             progressBar.show()
             sendBroadcastMessage.setOnClickListener{
-                if (movieBundle != null){
-                    val movieTitle = movieBundle.title
-                    val intent = Intent()
-                    intent.setAction(ACTION_SEND_MSG)
-                    intent.putExtra(MESSAGE_NAME,movieTitle)
-                    intent.addFlags(FLAG_RECEIVER_INCLUDE_BACKGROUND)
-                    activity?.sendBroadcast(intent)
-                }
+                val movieTitle = movieBundle.title
+                val intent = Intent()
+                intent.setAction(ACTION_SEND_MSG)
+                intent.putExtra(MESSAGE_NAME,movieTitle)
+                intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
+                activity?.sendBroadcast(intent)
             }
         }
 
