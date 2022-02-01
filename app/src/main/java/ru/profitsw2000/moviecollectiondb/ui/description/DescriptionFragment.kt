@@ -56,54 +56,9 @@ class DescriptionFragment : Fragment() {
     private val viewModel: DescriptionViewModel by viewModel()
     private var _binding: FragmentDescriptionBinding? = null
     private val binding get() = _binding!!
-    private lateinit var movieBundle: Movie
-    private val loadResultsReceiver: BroadcastReceiver = object :
-        BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            when (intent.getStringExtra(DESCRIPTION_LOAD_RESULT_EXTRA)) {
-                DESCRIPTION_RESPONSE_SUCCESS_EXTRA -> renderData(
-                    Movie(
-                        intent.getStringExtra(DESCRIPTION_TITLE_EXTRA)!!,
-                        intent.getStringExtra(DESCRIPTION_GENRES_EXTRA)!!,
-                        intent.getIntExtra(DESCRIPTION_RUNTIME_EXTRA, RUNTIME_ERROR),
-                        intent.getFloatExtra(DESCRIPTION_VOTE_AVERAGE_EXTRA, VOTE_AVERAGE_ERROR),
-                        intent.getIntExtra(DESCRIPTION_BUDGET_EXTRA, BUDGET_ERROR),
-                        intent.getIntExtra(DESCRIPTION_REVENUE_EXTRA, REVENUE_ERROR),
-                        intent.getStringExtra(DESCRIPTION_RELEASE_DATE_EXTRA)!!,
-                        intent.getStringExtra(DESCRIPTION_OVERVIEW_EXTRA)!!,
-                        R.drawable.film,
-                        intent.getIntExtra(DESCRIPTION_ID_EXTRA, ID_ERROR),
-                        )
-                    )
-                else -> TODO(PROCESS_ERROR)
-            }
-        }
-    }
-
-    private fun renderData(movie: Movie) {
-        if(movie.budget == BUDGET_ERROR ||
-            movie.duration == RUNTIME_ERROR ||
-            movie.rating == VOTE_AVERAGE_ERROR ||
-            movie.revenue == REVENUE_ERROR ||
-            movie.id == ID_ERROR) {
-            TODO(PROCESS_ERROR)
-        } else {
-            with(binding){
-                progressBar.hide()
-                setData(movie)
-                movieDescriptionGroup.show()
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        context?.let {
-            LocalBroadcastManager.getInstance(it)
-                .registerReceiver(loadResultsReceiver,
-                    IntentFilter(DESCRIPTION_INTENT_FILTER)
-                )
-        }
     }
 
     override fun onCreateView(
@@ -117,38 +72,38 @@ class DescriptionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
-            val id = it.id
+        val id = it.id
 
-            with(binding) {
-                viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
-                    when (appState) {
-                        is AppState.Error -> {
-                            val message = appState.message
-                            movieDescriptionGroup.hide()
-                            progressBar.hide()
-                            info.showSnackBar(
-                                message,
-                                getString(R.string.snack_bar_reload),
-                                { viewModel.getMovieDescription(id) },
-                                Snackbar.LENGTH_INDEFINITE
-                            )
-                        }
-                        AppState.Loading -> {
-                            movieDescriptionGroup.hide()
-                            progressBar.show()
-                        }
-                        is AppState.Success -> {
-
-                        }
-                        is AppState.MovieSuccess -> {
-                            progressBar.hide()
-                            setData(appState.movie)
-                            movieDescriptionGroup.show()
-                        }
+        with(binding) {
+            viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
+                when (appState) {
+                    is AppState.Error -> {
+                        val message = appState.message
+                        movieDescriptionGroup.hide()
+                        progressBar.hide()
+                        info.showSnackBar(
+                            message,
+                            getString(R.string.snack_bar_reload),
+                            { viewModel.getMovieDescription(id) },
+                            Snackbar.LENGTH_INDEFINITE
+                        )
                     }
-                })
-            }
-            viewModel.getMovieDescription(id)
+                    AppState.Loading -> {
+                        movieDescriptionGroup.hide()
+                        progressBar.show()
+                    }
+                    is AppState.Success -> {
+
+                    }
+                    is AppState.MovieSuccess -> {
+                        progressBar.hide()
+                        setData(appState.movie)
+                        movieDescriptionGroup.show()
+                    }
+                }
+            })
+        }
+        viewModel.getMovieDescription(id)
         }
     }
 
@@ -158,9 +113,6 @@ class DescriptionFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        context?.let {
-            LocalBroadcastManager.getInstance(it).unregisterReceiver(loadResultsReceiver)
-        }
         super.onDestroy()
     }
 
