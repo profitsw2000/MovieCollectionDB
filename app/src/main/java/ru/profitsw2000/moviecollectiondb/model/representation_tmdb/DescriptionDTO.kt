@@ -7,6 +7,7 @@ data class DescriptionDTO(
     val genres: List<GroupDTO>?,
     val id: Int?,
     val overview: String?,
+    val poster_path: String?,
     val release_date: String?,
     val revenue: Int?,
     val runtime: Int?,

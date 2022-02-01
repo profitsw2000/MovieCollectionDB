@@ -13,6 +13,7 @@ import android.widget.Button
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
@@ -117,8 +118,10 @@ class DescriptionFragment : Fragment() {
     }
 
     private fun setData(movie: Movie) = with(binding) {
+        val path = "https://image.tmdb.org/t/p/original/" + (movie.poster_path)
+
         title.text = movie.title
-        appCompatImageView.setImageResource(movie.picture)
+        Picasso.get().load(path).into(appCompatImageView)
         genre.text = movie.genre
         duration.text = movie.duration.toString() + " мин."
         rating.text = movie.rating.toString()

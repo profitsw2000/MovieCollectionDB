@@ -23,7 +23,7 @@ data class Movie(
             "транспорте. От души помахав кулаками, наш аудитор отправляет дебоширов" +
             " в больницу, но оказывается, что один из пострадавших — брат " +
             "влиятельного русского бандита. И он теперь жаждет мести.",
-    val picture: Int = R.drawable.film,
+    val poster_path: String = "https://image.tmdb.org/t/p/original/4B7liCxNCZIZGONmAMkCnxVlZQV.jpg",
     val id: Int = 887767
 ) : Parcelable
 

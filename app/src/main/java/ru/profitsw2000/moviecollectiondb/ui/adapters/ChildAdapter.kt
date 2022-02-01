@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentMainRecyclerItemBinding
 import ru.profitsw2000.moviecollectiondb.databinding.HorizontalRecyclerItemBinding
@@ -40,8 +41,9 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         fun bind(movie: Movie) = with(binding) {
+            val path = "https://image.tmdb.org/t/p/original/" + (movie.poster_path)
             horizontalRecyclerItemTextView.text = movie.title
-            movieDescriptionImage.setImageResource(movie.picture)
+            Picasso.get().load(path).into(movieDescriptionImage)
             root.setOnClickListener { itemClickListener.onItemViewClick(movie) }
         }
     }

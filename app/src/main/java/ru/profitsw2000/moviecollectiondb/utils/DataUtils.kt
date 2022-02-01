@@ -22,7 +22,7 @@ fun convertDescriptionDTOToModel(descriptionDTO: DescriptionDTO) : Movie {
 
     with(descriptionDTO){
         return Movie(title!!, genresString, runtime!!, vote_average!!,
-            budget!!, revenue!!, release_date!!, overview!!, R.drawable.film,
+            budget!!, revenue!!, release_date!!, overview!!, poster_path!!,
             id!!)
     }
 }

@@ -42,7 +42,7 @@ class RepositoryImpl : Repository {
                             dto.revenue ?: 0,
                             dto.release_date ?: "1970-01-01",
                             dto.overview ?: "Undefined",
-                                R.drawable.film,
+                    dto.poster_path ?: "https://image.tmdb.org/t/p/original/4B7liCxNCZIZGONmAMkCnxVlZQV.jpg",
                             dto.id ?: 0,
             )
         }
@@ -60,7 +60,8 @@ class RepositoryImpl : Repository {
             if (i != null) {
                 var j = 0
                 while (i > 0) {
-                    movies.add(Movie(title = dto.results?.get(j)?.title ?: "Неизвестно", id = dto.results?.get(j)?.id ?: 887767))
+                    movies.add(Movie(title = dto.results?.get(j)?.title ?: "Неизвестно", id = dto.results?.get(j)?.id ?: 887767,
+                    poster_path = dto.results?.get(j)?.poster_path ?: "https://image.tmdb.org/t/p/original/4B7liCxNCZIZGONmAMkCnxVlZQV.jpg"))
                     i--
                     j++
                 }
