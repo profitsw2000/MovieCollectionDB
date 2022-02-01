@@ -12,7 +12,7 @@ import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDT
 class RemoteDataSource {
 
     private val movieAPI = Retrofit.Builder()
-        .baseUrl("https://api.weather.yandex.ru/")
+        .baseUrl("https://api.themoviedb.org/3/")
         .addConverterFactory(GsonConverterFactory.create(
             GsonBuilder().setLenient().create()
             )

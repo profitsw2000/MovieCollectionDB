@@ -29,10 +29,6 @@ class DescriptionViewModel(private val descriptionRepositoryImpl: DescriptionRep
     private fun loadData(id: Int) {
         localLiveData.value = AppState.Loading
         descriptionRepositoryImpl.getMovieDescriptionFromServer(id, callBack)
-        //Thread{
-            //val data = repository.getMovieFromServer(id)
-            //localLiveData.postValue(AppState.MovieSuccess(data))
-        //}.start()
     }
 
     private val callBack = object :

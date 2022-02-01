@@ -116,25 +116,39 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
-            movieDescriptionGroup.hide()
-            progressBar.show()
-            sendBroadcastMessage.setOnClickListener{
-                val movieTitle = movieBundle.title
-                val intent = Intent()
-                intent.setAction(ACTION_SEND_MSG)
-                intent.putExtra(MESSAGE_NAME,movieTitle)
-                intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
-                activity?.sendBroadcast(intent)
+        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
+            val id = it.id
+
+            with(binding) {
+                viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
+                    when (appState) {
+                        is AppState.Error -> {
+                            val message = appState.message
+                            movieDescriptionGroup.hide()
+                            progressBar.hide()
+                            info.showSnackBar(
+                                message,
+                                getString(R.string.snack_bar_reload),
+                                { viewModel.getMovieDescription(id) },
+                                Snackbar.LENGTH_INDEFINITE
+                            )
+                        }
+                        AppState.Loading -> {
+                            movieDescriptionGroup.hide()
+                            progressBar.show()
+                        }
+                        is AppState.Success -> {
+
+                        }
+                        is AppState.MovieSuccess -> {
+                            progressBar.hide()
+                            setData(appState.movie)
+                            movieDescriptionGroup.show()
+                        }
+                    }
+                })
             }
-        }
-
-        movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
-
-        context?.let {
-            it.startService(Intent(it, DescriptionService::class.java).apply {
-                putExtra(MOVIE_ID_EXTRA,movieBundle.id)
-            })
+            viewModel.getMovieDescription(id)
         }
     }
 
