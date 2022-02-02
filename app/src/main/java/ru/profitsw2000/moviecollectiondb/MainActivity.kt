@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
+import ru.profitsw2000.moviecollectiondb.ui.menu.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.menu_settings-> {
-
+                openFragment(SettingsFragment.newInstance())
                 true
             }
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     private fun openFragment(fragment: Fragment) {
         supportFragmentManager.apply {
             beginTransaction()
-                .add(R.id.container, fragment)
+                .replace(R.id.container, fragment)
                 .addToBackStack("")
                 .commitAllowingStateLoss()
         }
