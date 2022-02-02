@@ -5,18 +5,18 @@
         android:id="@+id/menu_settings"
         android:title="@string/menu_settings_string"
         android:icon="@drawable/icon_settings"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/menu_favorite"
         android:title="@string/menu_favorite_string"
         android:icon="@drawable/icon_favorite"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/menu_history"
         android:title="@string/menu_history_string"
         android:icon="@drawable/icon_history"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>
