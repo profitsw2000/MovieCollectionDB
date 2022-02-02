@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/menu_settings_string"
+        android:icon="@drawable/icon_settings"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/menu_favorite"
+        android:title="@string/menu_favorite_string"
+        android:icon="@drawable/icon_favorite"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/menu_history"
+        android:title="@string/menu_history_string"
+        android:icon="@drawable/icon_history"
+        app:showAsAction="collapseActionView"/>
+
+</menu>
