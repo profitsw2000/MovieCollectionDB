@@ -13,7 +13,7 @@ import org.koin.android.ext.android.inject
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentSettingsBinding
 
-private const val SHOW_ADULT_KEY = "Show_adult"
+const val SHOW_ADULT_KEY = "Show_adult"
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -34,8 +34,8 @@ class SettingsFragment : Fragment() {
             val sharedPref = it.getPreferences(Context.MODE_PRIVATE)
 
             with(binding) {
-                if (sharedPref.getBoolean(SHOW_ADULT_KEY,false)) {
-                    adultSwitch.setOnCheckedChangeListener (null)
+                if (sharedPref.getBoolean(SHOW_ADULT_KEY, false)) {
+                    adultSwitch.setOnCheckedChangeListener(null)
                     adultSwitch.setChecked(true)
                 }
 
@@ -43,15 +43,12 @@ class SettingsFragment : Fragment() {
                     val editor = sharedPref.edit()
                     if (isCheked) {
                         editor.putBoolean(SHOW_ADULT_KEY, true)
-                    }
-                    else {
+                    } else {
                         editor.putBoolean(SHOW_ADULT_KEY, false)
                     }
                     editor.apply()
                 }
             }
-
-
         }
     }
 

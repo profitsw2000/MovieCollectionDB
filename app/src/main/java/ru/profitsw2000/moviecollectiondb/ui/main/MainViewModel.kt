@@ -15,7 +15,7 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
 
     fun getMovie() = getDataFromLocalSource()
 
-    fun getMovieInfo() = getDataFromServer()
+    fun getMovieInfo(includeAdult: Boolean) = getDataFromServer(includeAdult)
 
     private fun getDataFromLocalSource() {
         val randomNumber = (0..5).random()
@@ -31,12 +31,12 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
         }.start()
     }
 
-    private fun getDataFromServer() {
+    private fun getDataFromServer(includeAdult: Boolean) {
         val request = RequestGenerator.getGenresListRQ()
 
         liveData.value = AppState.Loading
         Thread {
-            val categories = repository.getCategoriesFromServer(request)
+            val categories = repository.getCategoriesFromServer(request, includeAdult)
 
             if (categories != null && categories.isNotEmpty()) {
                 liveData.postValue(AppState.Success(categories))

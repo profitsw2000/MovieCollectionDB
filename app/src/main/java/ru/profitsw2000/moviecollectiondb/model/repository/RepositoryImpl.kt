@@ -70,7 +70,7 @@ class RepositoryImpl : Repository {
         return movies
     }
 
-    override fun getCategoriesFromServer(request: String): List<Category> {
+    override fun getCategoriesFromServer(request: String, includeAdult: Boolean): List<Category> {
 
         var categories: ArrayList<Category> = arrayListOf()
         val dto = GenresLoader.loadGenres(request)
@@ -82,7 +82,7 @@ class RepositoryImpl : Repository {
                 var j = 0
                 while (i > 0) {
                     val id = dto.genres?.get(j)?.id ?: 0
-                    val moviesList = getMoviesFromServer(RequestGenerator.getMovieListByGenreRQ(id))
+                    val moviesList = getMoviesFromServer(RequestGenerator.getMovieListByGenreRQ(id, includeAdult))
                     if (moviesList != null && moviesList.isNotEmpty()) {
                         categories.add(Category(
                             dto.genres?.get(j)?.id ?: 0,dto.genres?.get(j)?.name ?: "Неизвестно",

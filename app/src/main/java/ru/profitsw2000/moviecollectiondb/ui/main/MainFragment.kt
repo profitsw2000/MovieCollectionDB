@@ -21,6 +21,7 @@ import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.receivers.ConnectivityReceiver
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
+import ru.profitsw2000.moviecollectiondb.ui.menu.SHOW_ADULT_KEY
 
 class MainFragment : Fragment() {
 
@@ -46,12 +47,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var includeAdult = false
+
+        activity?.let {
+            val sharedPref = it.getPreferences(Context.MODE_PRIVATE)
+            includeAdult = sharedPref.getBoolean(SHOW_ADULT_KEY, false)
+        }
+
         with(binding) {
             mainFragmentRecyclerView.adapter = adapter
         }
-        val observer = Observer<AppState> { renderData(it) }
+        val observer = Observer<AppState> { renderData(it, includeAdult) }
         viewModel.getLiveData().observe(viewLifecycleOwner, observer)
-        viewModel.getMovieInfo()
+        viewModel.getMovieInfo(includeAdult)
     }
 
     override fun onDestroyView() {
@@ -64,7 +72,7 @@ class MainFragment : Fragment() {
         super.onDestroy()
     }
 
-    private fun renderData(appState: AppState) = with(binding) {
+    private fun renderData(appState: AppState, includeAdult: Boolean) = with(binding) {
         when (appState) {
             is AppState.Success -> {
                 progressBar.hide()
@@ -98,7 +106,7 @@ class MainFragment : Fragment() {
                 val message = appState.message
                 progressBar.hide()
                 mainFragmentRecyclerView.hide()
-                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieInfo() }, Snackbar.LENGTH_INDEFINITE)
+                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieInfo(includeAdult) }, Snackbar.LENGTH_INDEFINITE)
             }
         }
     }
