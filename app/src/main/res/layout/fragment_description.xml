@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/info"
@@ -7,196 +7,192 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Title_text"
-            android:textColor="@color/black"
-            android:textSize="@dimen/Title_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/appCompatImageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_container">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/cardview_shadow_start_color"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:ignore="MissingConstraints"
-            tools:srcCompat="@drawable/film" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Title_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/Title_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/appCompatImageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/genre_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/genre_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/cardview_shadow_start_color"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:ignore="MissingConstraints"
+                tools:srcCompat="@drawable/film" />
 
-        <TextView
-            android:id="@+id/genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/genre_label"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+            <TextView
+                android:id="@+id/genre_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/genre_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
-        <TextView
-            android:id="@+id/duration_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/duration_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genre_label" />
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/genre_label"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/duration_label"
-            app:layout_constraintTop_toBottomOf="@+id/genre" />
+            <TextView
+                android:id="@+id/duration_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/duration_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genre_label" />
 
-        <TextView
-            android:id="@+id/rating_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/rating_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/duration_label" />
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/duration_label"
+                app:layout_constraintTop_toBottomOf="@+id/genre" />
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/rating_label"
-            app:layout_constraintTop_toBottomOf="@+id/duration" />
+            <TextView
+                android:id="@+id/rating_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/rating_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/duration_label" />
 
-        <TextView
-            android:id="@+id/budget_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/budget_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rating_label" />
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/rating_label"
+                app:layout_constraintTop_toBottomOf="@+id/duration" />
 
-        <TextView
-            android:id="@+id/budget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/budget_label"
-            app:layout_constraintTop_toBottomOf="@+id/rating" />
+            <TextView
+                android:id="@+id/budget_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/budget_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rating_label" />
 
-        <TextView
-            android:id="@+id/revenue_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/revenue_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/budget_label" />
+            <TextView
+                android:id="@+id/budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/budget_label"
+                app:layout_constraintTop_toBottomOf="@+id/rating" />
 
-        <TextView
-            android:id="@+id/revenue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/revenue_label"
-            app:layout_constraintTop_toBottomOf="@+id/budget" />
+            <TextView
+                android:id="@+id/revenue_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/revenue_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/budget_label" />
 
-        <TextView
-            android:id="@+id/release_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/release_date_r"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/revenue_label" />
+            <TextView
+                android:id="@+id/revenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/revenue_label"
+                app:layout_constraintTop_toBottomOf="@+id/budget" />
 
-        <TextView
-            android:id="@+id/release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/info_text_size"
-            app:layout_constraintStart_toEndOf="@+id/release_date_label"
-            app:layout_constraintTop_toBottomOf="@+id/revenue" />
+            <TextView
+                android:id="@+id/release_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/release_date_r"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/revenue_label" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/release_date" />
+            <TextView
+                android:id="@+id/release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/info_text_size"
+                app:layout_constraintStart_toEndOf="@+id/release_date_label"
+                app:layout_constraintTop_toBottomOf="@+id/revenue" />
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/descriptionScrollView"
-            android:fillViewport="true">
+            <View
+                android:id="@+id/divider"
+                android:layout_width="409dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/release_date" />
+
 
             <TextView
                 android:id="@+id/description"
@@ -206,29 +202,78 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="12dp"
                 android:text="TextView"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/info_text_size" />
 
-        </androidx.core.widget.NestedScrollView>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateOnly="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/note_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/note_label_text"
+                android:textSize="@dimen/note_label_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintBottom_toTopOf="@+id/film_note"/>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/movieDescriptionGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:visibility="visible"
-        app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
-        duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
-        release_date, release_date_label, divider, descriptionScrollView" />
+            <EditText
+                android:id="@+id/film_note"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note_label"
+                app:layout_constraintBottom_toTopOf="@+id/saveNote"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/saveNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_note_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/film_note" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateOnly="true"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/movieDescriptionGroup"
+                tools:visibility="visible"
+                app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
+                            duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
+                            release_date, release_date_label, divider, note_label, film_note, saveNote" />
+            <!--            <androidx.constraintlayout.widget.Group
+                            android:id="@id/movieDescriptionGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:visibility="visible"
+                            app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
+                            duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
+                            release_date, release_date_label, divider" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
