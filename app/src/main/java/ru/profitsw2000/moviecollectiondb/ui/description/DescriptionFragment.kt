@@ -110,13 +110,13 @@ class DescriptionFragment : Fragment() {
                             movieDescriptionGroup.hide()
                             progressBar.show()
                         }
-                        is AppState.Success -> {
-
-                        }
                         is AppState.MovieSuccess -> {
                             progressBar.hide()
                             setData(appState.movie)
                             movieDescriptionGroup.show()
+                        }
+                        else -> {
+
                         }
                     }
                 })

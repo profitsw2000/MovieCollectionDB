@@ -27,6 +27,7 @@ class DescriptionViewModel(private val descriptionRepositoryImpl: DescriptionRep
     val movieLiveData: LiveData<AppState> get() {
         return localLiveData
     }
+
     val noteRepository: LocalRepository = LocalRepositoryImpl(App.getNoteDao())
 
     suspend fun saveNoteToDB(movie: Movie, note: String) {

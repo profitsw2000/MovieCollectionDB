@@ -95,9 +95,6 @@ class MainFragment : Fragment() {
                 mainFragmentRecyclerView.adapter = adapter
                 mainFragmentRecyclerView.show()
             }
-            is AppState.MovieSuccess ->{
-
-            }
             is AppState.Loading -> {
                 mainFragmentRecyclerView.hide()
                 progressBar.show()
@@ -107,6 +104,9 @@ class MainFragment : Fragment() {
                 progressBar.hide()
                 mainFragmentRecyclerView.hide()
                 main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieInfo(includeAdult) }, Snackbar.LENGTH_INDEFINITE)
+            }
+            else -> {
+
             }
         }
     }

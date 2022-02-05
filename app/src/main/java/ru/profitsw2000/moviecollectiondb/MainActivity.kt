@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 import ru.profitsw2000.moviecollectiondb.ui.menu.SettingsFragment
+import ru.profitsw2000.moviecollectiondb.ui.notes.NoteFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.menu_history-> {
+                true
+            }
+
+            R.id.menu_notes-> {
+                openFragment(NoteFragment.newInstance())
                 true
             }
 

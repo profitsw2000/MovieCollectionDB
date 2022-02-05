@@ -19,4 +19,10 @@
         android:icon="@drawable/icon_history"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/menu_notes"
+        android:title="@string/notes_menu_item"
+        android:icon="@drawable/icon_notes"
+        app:showAsAction="ifRoom"/>
+
 </menu>
