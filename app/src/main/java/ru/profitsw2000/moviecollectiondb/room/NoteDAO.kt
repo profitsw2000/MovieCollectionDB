@@ -6,17 +6,17 @@ import androidx.room.*
 interface NoteDAO {
 
     @Query("SELECT * FROM NoteEntity")
-    fun all(): List<NoteEntity>
+    suspend fun all(): List<NoteEntity>
 
     @Query("SELECT * FROM NoteEntity WHERE title LIKE :title")
-    fun getDataByWord(title: String): List<NoteEntity>
+    suspend fun getDataByWord(title: String): List<NoteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(entity: NoteEntity)
+    suspend fun insert(entity: NoteEntity): Long
 
     @Update
-    fun update(entity: NoteEntity)
+    suspend fun update(entity: NoteEntity)
 
     @Delete
-    fun delete(entity: NoteEntity)
+    suspend fun delete(entity: NoteEntity)
 }
