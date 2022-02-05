@@ -5,5 +5,5 @@ import ru.profitsw2000.moviecollectiondb.room.NoteEntity
 
 interface LocalRepository {
     fun getAllNotes(): List<NoteEntity>
-    fun saveNote(movie: Movie)
+    fun saveNote(movie: Movie, note: String)
 }

@@ -9,7 +9,7 @@ class LocalRepositoryImpl(private val localDataSource: NoteDAO) : LocalRepositor
         TODO("Not yet implemented")
     }
 
-    override fun saveNote(movie: Movie) {
+    override fun saveNote(movie: Movie, note: String) {
         TODO("Not yet implemented")
     }
 
