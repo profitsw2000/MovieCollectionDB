@@ -5,5 +5,5 @@ import ru.profitsw2000.moviecollectiondb.room.NoteEntity
 
 interface LocalRepository {
     suspend fun getAllNotes(): List<NoteEntity>
-    suspend fun saveNote(movie: Movie, note: String): Long?
+    suspend fun saveNote(movie: Movie, note: String)
 }

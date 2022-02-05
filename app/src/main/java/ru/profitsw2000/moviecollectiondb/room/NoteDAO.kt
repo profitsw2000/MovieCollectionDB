@@ -11,8 +11,8 @@ interface NoteDAO {
     @Query("SELECT * FROM NoteEntity WHERE title LIKE :title")
     suspend fun getDataByWord(title: String): List<NoteEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(entity: NoteEntity): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(entity: NoteEntity)
 
     @Update
     suspend fun update(entity: NoteEntity)

@@ -15,6 +15,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import coil.api.load
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
@@ -73,40 +75,54 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
-        val id = it.id
-
-        with(binding) {
-            viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
-                when (appState) {
-                    is AppState.Error -> {
-                        val message = appState.message
-                        movieDescriptionGroup.hide()
-                        progressBar.hide()
-                        info.showSnackBar(
-                            message,
-                            getString(R.string.snack_bar_reload),
-                            { viewModel.getMovieDescription(id) },
-                            Snackbar.LENGTH_INDEFINITE
-                        )
-                    }
-                    AppState.Loading -> {
-                        movieDescriptionGroup.hide()
-                        progressBar.show()
-                    }
-                    is AppState.Success -> {
-
-                    }
-                    is AppState.MovieSuccess -> {
-                        progressBar.hide()
-                        setData(appState.movie)
-                        movieDescriptionGroup.show()
-                    }
+        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
+        if (movie != null) {
+            renderData(movie)
+            with(binding){
+                saveNote.setOnClickListener {
+                    val noteText = filmNote.text.toString()
+                    GlobalScope.launch { viewModel.saveNoteToDB(movie, noteText) }
                 }
-            })
+            }
         }
-        viewModel.getMovieDescription(id)
-        }
+    }
+
+    private fun renderData(movie: Movie) {
+/*        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
+            val id = it.id*/
+        val id = movie.id
+
+            with(binding) {
+                viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
+                    when (appState) {
+                        is AppState.Error -> {
+                            val message = appState.message
+                            movieDescriptionGroup.hide()
+                            progressBar.hide()
+                            info.showSnackBar(
+                                message,
+                                getString(R.string.snack_bar_reload),
+                                { viewModel.getMovieDescription(id) },
+                                Snackbar.LENGTH_INDEFINITE
+                            )
+                        }
+                        AppState.Loading -> {
+                            movieDescriptionGroup.hide()
+                            progressBar.show()
+                        }
+                        is AppState.Success -> {
+
+                        }
+                        is AppState.MovieSuccess -> {
+                            progressBar.hide()
+                            setData(appState.movie)
+                            movieDescriptionGroup.show()
+                        }
+                    }
+                })
+            }
+            viewModel.getMovieDescription(id)
+        //}
     }
 
     override fun onDestroyView() {

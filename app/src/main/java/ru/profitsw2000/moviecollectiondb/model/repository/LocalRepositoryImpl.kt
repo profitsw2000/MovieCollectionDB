@@ -10,8 +10,8 @@ class LocalRepositoryImpl(private val localDataSource: NoteDAO) : LocalRepositor
         return localDataSource.all()
     }
 
-    override suspend fun saveNote(movie: Movie, note: String): Long? {
-        return localDataSource.insert(convertMovieToNoteEntity(movie, note))
+    override suspend fun saveNote(movie: Movie, note: String) {
+        localDataSource.insert(convertMovieToNoteEntity(movie, note))
     }
 
 }

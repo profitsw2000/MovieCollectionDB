@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.profitsw2000.moviecollectiondb.App
 import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.repository.DescriptionRepository
 import ru.profitsw2000.moviecollectiondb.model.repository.DescriptionRepositoryImpl
+import ru.profitsw2000.moviecollectiondb.model.repository.LocalRepository
+import ru.profitsw2000.moviecollectiondb.model.repository.LocalRepositoryImpl
+import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
 import ru.profitsw2000.moviecollectiondb.retrofit.RemoteDataSource
 import ru.profitsw2000.moviecollectiondb.utils.convertDescriptionDTOToModel
@@ -22,6 +26,11 @@ class DescriptionViewModel(private val descriptionRepositoryImpl: DescriptionRep
     private val localLiveData: MutableLiveData<AppState> = MutableLiveData()
     val movieLiveData: LiveData<AppState> get() {
         return localLiveData
+    }
+    val noteRepository: LocalRepository = LocalRepositoryImpl(App.getNoteDao())
+
+    suspend fun saveNoteToDB(movie: Movie, note: String) {
+        noteRepository.saveNote(movie, note)
     }
 
     fun getMovieDescription(id: Int) = loadData(id)
