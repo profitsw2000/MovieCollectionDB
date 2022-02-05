@@ -2,6 +2,7 @@ package ru.profitsw2000.moviecollectiondb
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.profitsw2000.moviecollectiondb.room.NoteDAO
@@ -28,6 +29,7 @@ class App : Application() {
                     if (db == null) {
                         if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(appInstance!!.applicationContext, NoteDB::class.java, DB_NAME)
+                            .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
                             .build()
                     }
                 }

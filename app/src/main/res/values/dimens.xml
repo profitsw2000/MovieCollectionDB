@@ -19,4 +19,5 @@
     <dimen name="settings_switch_text_padding">32dp</dimen>
     <dimen name="settings_switch_padding">16dp</dimen>
     <dimen name="note_label_text_size">20sp</dimen>
+    <dimen name="note_recycler_margin">5dp</dimen>
 </resources>
