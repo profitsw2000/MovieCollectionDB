@@ -183,6 +183,17 @@
                 app:layout_constraintStart_toEndOf="@+id/release_date_label"
                 app:layout_constraintTop_toBottomOf="@+id/revenue" />
 
+            <ImageView
+                android:id="@+id/favorite_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/release_date_label"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                android:src="@drawable/icon_add_to_favorites" />
+
             <View
                 android:id="@+id/divider"
                 android:layout_width="409dp"
@@ -191,8 +202,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/release_date" />
-
+                app:layout_constraintTop_toBottomOf="@+id/favorite_icon" />
 
             <TextView
                 android:id="@+id/description"
@@ -207,7 +217,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/info_text_size" />
-
 
             <TextView
                 android:id="@+id/note_label"
@@ -263,15 +272,8 @@
                 tools:visibility="visible"
                 app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
                             duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
-                            release_date, release_date_label, divider, note_label, film_note, saveNote" />
-            <!--            <androidx.constraintlayout.widget.Group
-                            android:id="@id/movieDescriptionGroup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:visibility="visible"
-                            app:constraint_referenced_ids="title, appCompatImageView, genre_label, genre,
-                            duration_label, duration, rating_label, rating, budget, budget_label, revenue, revenue_label,
-                            release_date, release_date_label, divider" />-->
+                            release_date, release_date_label, favorite_icon, divider, description, note_label, film_note, saveNote" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

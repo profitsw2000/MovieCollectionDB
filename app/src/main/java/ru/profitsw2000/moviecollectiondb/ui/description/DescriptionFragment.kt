@@ -22,9 +22,6 @@ import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.logger.MESSAGE
-import ru.profitsw2000.moviecollectiondb.services.DescriptionService
-import ru.profitsw2000.moviecollectiondb.services.MOVIE_ID_EXTRA
 
 const val DESCRIPTION_INTENT_FILTER = "DESCRIPTION INTENT FILTER"
 const val DESCRIPTION_LOAD_RESULT_EXTRA = "DESCRIPTION LOAD RESULT EXTRA"
@@ -75,54 +72,57 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
         if (movie != null) {
             renderData(movie)
             with(binding){
+                //нажатие на кнопку сохранения заметки
                 saveNote.setOnClickListener {
                     val noteText = filmNote.text.toString()
                     GlobalScope.launch { viewModel.saveNoteToDB(movie, noteText) }
+                }
+
+                favoriteIcon.setOnClickListener {
+                    favoriteIcon.setImageDrawable(context?.getDrawable(R.drawable.icon_added_to_favorites))
                 }
             }
         }
     }
 
     private fun renderData(movie: Movie) {
-/*        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
-            val id = it.id*/
         val id = movie.id
 
-            with(binding) {
-                viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
-                    when (appState) {
-                        is AppState.Error -> {
-                            val message = appState.message
-                            movieDescriptionGroup.hide()
-                            progressBar.hide()
-                            info.showSnackBar(
-                                message,
-                                getString(R.string.snack_bar_reload),
-                                { viewModel.getMovieDescription(id) },
-                                Snackbar.LENGTH_INDEFINITE
-                            )
-                        }
-                        AppState.Loading -> {
-                            movieDescriptionGroup.hide()
-                            progressBar.show()
-                        }
-                        is AppState.MovieSuccess -> {
-                            progressBar.hide()
-                            setData(appState.movie)
-                            movieDescriptionGroup.show()
-                        }
-                        else -> {
-
-                        }
+        with(binding) {
+            viewModel.movieLiveData.observe(viewLifecycleOwner, { appState ->
+                when (appState) {
+                    is AppState.Error -> {
+                        val message = appState.message
+                        movieDescriptionGroup.hide()
+                        progressBar.hide()
+                        info.showSnackBar(
+                            message,
+                            getString(R.string.snack_bar_reload),
+                            { viewModel.getMovieDescription(id) },
+                            Snackbar.LENGTH_INDEFINITE
+                        )
                     }
-                })
-            }
-            viewModel.getMovieDescription(id)
-        //}
+                    AppState.Loading -> {
+                        movieDescriptionGroup.hide()
+                        progressBar.show()
+                    }
+                    is AppState.MovieSuccess -> {
+                        progressBar.hide()
+                        setData(appState.movie)
+                        movieDescriptionGroup.show()
+                    }
+                    else -> {
+
+                    }
+                }
+            })
+        }
+        viewModel.getMovieDescription(id)
     }
 
     override fun onDestroyView() {
