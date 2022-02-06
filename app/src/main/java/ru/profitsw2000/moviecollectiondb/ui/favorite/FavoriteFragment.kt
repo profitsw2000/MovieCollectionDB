@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.databinding.FragmentFavoriteBinding
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentNoteBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.ui.adapters.NotesAdapter
@@ -15,9 +16,9 @@ import ru.profitsw2000.moviecollectiondb.ui.notes.NoteFragment
 import ru.profitsw2000.moviecollectiondb.ui.notes.NoteViewModel
 
 class FavoriteFragment : Fragment() {
-/*
-    private val viewModel: NoteViewModel by viewModel()
-    private var _binding: FragmentNoteBinding? = null
+
+/*    private val viewModel: FavoriteViewModel by viewModel()
+    private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private val adapter: NotesAdapter by lazy { NotesAdapter() }
 
