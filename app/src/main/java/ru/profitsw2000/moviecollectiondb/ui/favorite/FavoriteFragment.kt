@@ -5,56 +5,92 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.databinding.FragmentNoteBinding
+import ru.profitsw2000.moviecollectiondb.model.AppState
+import ru.profitsw2000.moviecollectiondb.ui.adapters.NotesAdapter
+import ru.profitsw2000.moviecollectiondb.ui.notes.NoteFragment
+import ru.profitsw2000.moviecollectiondb.ui.notes.NoteViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+/*
+    private val viewModel: NoteViewModel by viewModel()
+    private var _binding: FragmentNoteBinding? = null
+    private val binding get() = _binding!!
+    private val adapter: NotesAdapter by lazy { NotesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        _binding = FragmentNoteBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.noteFragmentRecyclerview.adapter = adapter
+
+        viewModel.movieNoteLiveData.observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.getMovieNotes()
+    }
+
+    private fun renderData(appState: AppState) = with(binding) {
+        when (appState) {
+            is AppState.NotesSuccess -> {
+                progressBar.hide()
+                noteFragmentRecyclerview.show()
+                adapter.setData(appState.noteList)
+            }
+            is AppState.Loading -> {
+                progressBar.show()
+                noteFragmentRecyclerview.hide()
+            }
+            is AppState.Error -> {
+            }
+            else -> {
+
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+    private fun View.showSnackBar (
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 
+    private fun View.show() : View {
+        if (visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+        }
+        return this
+    }
+
+    private fun View.hide() : View {
+        if (visibility != View.GONE) {
+            visibility = View.GONE
+        }
+        return this
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }*/
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavoriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = FavoriteFragment()
     }
 }
