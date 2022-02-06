@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.profitsw2000.moviecollectiondb.R
-import ru.profitsw2000.moviecollectiondb.databinding.FragmentNoteBinding
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentNoteRecyclerItemBinding
-import ru.profitsw2000.moviecollectiondb.databinding.HorizontalRecyclerItemBinding
 import ru.profitsw2000.moviecollectiondb.room.NoteEntity
 
 class NotesAdapter: RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
@@ -34,10 +31,14 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
         return data.size
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(note: NoteEntity) {
             with(binding){
-                movieTitle.text = note.title + " (" + note.id.toString() + ")"
+                movieTitle.text = note.title + " (" + note.movieID.toString() + ")"
                 movieNote.text = note.movieNote
             }
         }
