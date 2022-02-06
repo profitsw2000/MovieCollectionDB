@@ -85,6 +85,7 @@ class DescriptionFragment : Fragment() {
 
                 favoriteIcon.setOnClickListener {
                     favoriteIcon.setImageDrawable(context?.getDrawable(R.drawable.icon_added_to_favorites))
+                    GlobalScope.launch { viewModel.saveMovieToFavoriteDB(movie) }
                 }
             }
         }

@@ -33,6 +33,10 @@ class DescriptionViewModel(private val descriptionRepositoryImpl: DescriptionRep
         noteRepository.saveNote(movie, note)
     }
 
+    suspend fun saveMovieToFavoriteDB(movie: Movie) {
+        favoriteRepository.saveMovieToFavorite(movie)
+    }
+
     fun getMovieDescription(id: Int) = loadData(id)
 
     private fun loadData(id: Int) {
