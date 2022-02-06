@@ -1,6 +1,7 @@
 package ru.profitsw2000.moviecollectiondb.ui.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
 class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClickListener)
     : RecyclerView.Adapter<ParentAdapter.MainViewHolder>() {
+
+    private val MY_LOG = "Recycle"
 
     private val viewPool = RecyclerView.RecycledViewPool()
     private var categoriesData: List<Category> = listOf()
@@ -35,6 +38,14 @@ class ParentAdapter (private val itemClickListener: MainFragment.OnItemViewClick
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(categoriesData[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return categoriesData[position].id.toLong()
     }
 
     override fun getItemCount() = categoriesData.size

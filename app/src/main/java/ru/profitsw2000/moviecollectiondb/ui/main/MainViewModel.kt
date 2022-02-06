@@ -14,6 +14,8 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
 
     fun getMovie() = getDataFromLocalSource()
 
+    fun getMovieInfo() = getDataFromServer()
+
     private fun getDataFromLocalSource() {
         val randomNumber = (0..5).random()
 
@@ -22,6 +24,21 @@ class MainViewModel (private val repository: Repository) : ViewModel() {
             sleep(1000)
             if (randomNumber < 5) {
                 liveData.postValue(AppState.Success(repository.getCategoriesFromLocalStorage()))
+            } else {
+                liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
+            }
+        }.start()
+    }
+
+    private fun getDataFromServer() {
+        val request = "https://api.themoviedb.org/3/genre/movie/list?api_key=c653b216d7d09c4aa4176e651f1ac4dd&language=ru"
+
+        liveData.value = AppState.Loading
+        Thread {
+            val categories = repository.getCategoriesFromServer(request)
+
+            if (categories != null && categories.isNotEmpty()) {
+                liveData.postValue(AppState.Success(categories))
             } else {
                 liveData.postValue(AppState.Error("Ошибка загрузки!!!"))
             }

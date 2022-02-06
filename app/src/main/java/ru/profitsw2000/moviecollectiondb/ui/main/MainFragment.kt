@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
         }
         val observer = Observer<AppState> { renderData(it) }
         viewModel.getLiveData().observe(viewLifecycleOwner, observer)
-        viewModel.getMovie()
+        viewModel.getMovieInfo()
     }
 
     override fun onDestroyView() {
@@ -77,7 +77,7 @@ class MainFragment : Fragment() {
                 val message = appState.message
                 progressBar.hide()
                 mainFragmentRecyclerView.hide()
-                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovie() }, Snackbar.LENGTH_INDEFINITE)
+                main.showSnackBar(message, getString(R.string.snack_bar_reload), { viewModel.getMovieInfo() }, Snackbar.LENGTH_INDEFINITE)
             }
         }
     }
@@ -91,14 +91,14 @@ class MainFragment : Fragment() {
         Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 
-    fun View.show() : View {
+    private fun View.show() : View {
         if (visibility != View.VISIBLE) {
             visibility = View.VISIBLE
         }
         return this
     }
 
-    fun View.hide() : View {
+    private fun View.hide() : View {
         if (visibility != View.GONE) {
             visibility = View.GONE
         }

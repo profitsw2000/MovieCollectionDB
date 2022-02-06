@@ -9,11 +9,6 @@ import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentDescriptionBinding
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DescriptionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DescriptionFragment : Fragment() {
 
     //private lateinit var binding: FragmentDescriptionBinding

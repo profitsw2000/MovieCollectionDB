@@ -9,6 +9,10 @@ object CategoriesFactory {
 
     private val titles =  arrayListOf( "Комедии", "Мультфильмы", "Ужасы", "Фантастика", "Триллеры", "Боевики", "Мелодрамы", "Драмы")
 
+    private fun randomID(): Int {
+        return random.nextInt(100000)
+    }
+
     private fun randomTitle() : String{
         val index = random.nextInt(titles.size)
         return titles[index]
@@ -21,7 +25,7 @@ object CategoriesFactory {
     fun getCategories(count : Int) : List<Category>{
         val categories = mutableListOf<Category>()
         repeat(count){
-            val category = Category(randomTitle(), randomMovies())
+            val category = Category(randomID(), randomTitle(), randomMovies())
             categories.add(category)
         }
         return categories

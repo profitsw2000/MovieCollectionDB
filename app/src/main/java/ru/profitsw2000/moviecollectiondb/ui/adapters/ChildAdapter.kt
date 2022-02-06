@@ -24,14 +24,12 @@ class ChildAdapter(private val movies : List<Movie>, private val itemClickListen
         return ViewHolder(binding.root)
     }
 
-/*    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v =  LayoutInflater.from(parent.context)
-            .inflate(R.layout.horizontal_recycler_item,parent,false)
-        return ViewHolder(v)
-    }*/
-
     override fun getItemCount(): Int {
         return movies.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
