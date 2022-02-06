@@ -22,7 +22,7 @@ class FavoriteViewModel (private val favoriteRepository: LocalFavRepository = Lo
         return favoriteLiveData
     }
 
-    fun getMovieNotes() {
+    fun getFavoriteMovies() {
         favoriteLiveData.value = AppState.Loading
         viewModelScope.launch { favoriteLiveData.postValue(AppState.FavoriteSuccess(favoriteRepository.getAllFavoriteMovies()))  }
         //noteLiveData.value = AppState.Error("Nothing")

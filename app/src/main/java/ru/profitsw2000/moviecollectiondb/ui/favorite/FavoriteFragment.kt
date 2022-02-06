@@ -5,50 +5,52 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentFavoriteBinding
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentNoteBinding
 import ru.profitsw2000.moviecollectiondb.model.AppState
+import ru.profitsw2000.moviecollectiondb.ui.adapters.FavoriteAdapter
 import ru.profitsw2000.moviecollectiondb.ui.adapters.NotesAdapter
 import ru.profitsw2000.moviecollectiondb.ui.notes.NoteFragment
 import ru.profitsw2000.moviecollectiondb.ui.notes.NoteViewModel
 
 class FavoriteFragment : Fragment() {
 
-/*    private val viewModel: FavoriteViewModel by viewModel()
+    private val viewModel: FavoriteViewModel by viewModel()
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
-    private val adapter: NotesAdapter by lazy { NotesAdapter() }
+    private val adapter: FavoriteAdapter by lazy { FavoriteAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        _binding = FragmentNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.noteFragmentRecyclerview.adapter = adapter
+        binding.favoriteFragmentRecyclerview.adapter = adapter
 
-        viewModel.movieNoteLiveData.observe(viewLifecycleOwner, Observer { renderData(it) })
-        viewModel.getMovieNotes()
+        viewModel.favoriteMovieLiveData.observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.getFavoriteMovies()
     }
 
     private fun renderData(appState: AppState) = with(binding) {
         when (appState) {
-            is AppState.NotesSuccess -> {
+            is AppState.FavoriteSuccess -> {
                 progressBar.hide()
-                noteFragmentRecyclerview.show()
-                adapter.setData(appState.noteList)
+                favoriteFragmentRecyclerview.show()
+                adapter.setData(appState.favoriteList)
             }
             is AppState.Loading -> {
                 progressBar.show()
-                noteFragmentRecyclerview.hide()
+                favoriteFragmentRecyclerview.hide()
             }
             is AppState.Error -> {
             }
@@ -88,7 +90,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-    }*/
+    }
 
     companion object {
         @JvmStatic
