@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import ru.profitsw2000.moviecollectiondb.room.FavoriteDAO
 import ru.profitsw2000.moviecollectiondb.room.NoteDAO
 import ru.profitsw2000.moviecollectiondb.room.NoteDB
 
@@ -35,6 +36,20 @@ class App : Application() {
                 }
             }
             return db!!.noteDao()
+        }
+
+        fun getFavoriteDao(): FavoriteDAO {
+            if (db == null) {
+                synchronized(NoteDB::class.java) {
+                    if (db == null) {
+                        if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
+                        db = Room.databaseBuilder(appInstance!!.applicationContext, NoteDB::class.java, DB_NAME)
+                            .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
+                            .build()
+                    }
+                }
+            }
+            return db!!.favoriteDao()
         }
     }
 
