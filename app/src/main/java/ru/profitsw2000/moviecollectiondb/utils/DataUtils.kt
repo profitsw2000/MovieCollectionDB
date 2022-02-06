@@ -3,6 +3,7 @@ package ru.profitsw2000.moviecollectiondb.utils
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
+import ru.profitsw2000.moviecollectiondb.room.FavoriteEntity
 import ru.profitsw2000.moviecollectiondb.room.NoteEntity
 
 fun convertDescriptionDTOToModel(descriptionDTO: DescriptionDTO) : Movie {
@@ -30,4 +31,8 @@ fun convertDescriptionDTOToModel(descriptionDTO: DescriptionDTO) : Movie {
 
 fun convertMovieToNoteEntity(movie: Movie, note: String): NoteEntity {
     return NoteEntity(0, movie.title, movie.id, note)
+}
+
+fun convertMovieToTitle(movie: Movie): FavoriteEntity {
+    return FavoriteEntity(0, movie.title)
 }
