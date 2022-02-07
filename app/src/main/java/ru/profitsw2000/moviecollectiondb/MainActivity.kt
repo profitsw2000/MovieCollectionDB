@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
+            R.id.menu_contacts-> {
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

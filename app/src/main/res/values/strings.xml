@@ -32,4 +32,5 @@
     <string name="note_label_text">Заметка к фильму:</string>
     <string name="save_note_button_text">Save</string>
     <string name="notes_menu_item">Notes</string>
+    <string name="contacts_menu_item">Contacts</string>
 </resources>

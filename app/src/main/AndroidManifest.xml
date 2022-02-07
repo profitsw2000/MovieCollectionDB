@@ -3,6 +3,7 @@
     package="ru.profitsw2000.moviecollectiondb">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".App"

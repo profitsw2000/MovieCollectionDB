@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/menu_settings"
         android:title="@string/menu_settings_string"
@@ -23,6 +24,12 @@
         android:id="@+id/menu_notes"
         android:title="@string/notes_menu_item"
         android:icon="@drawable/icon_notes"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_contacts"
+        android:title="@string/contacts_menu_item"
+        android:icon="@drawable/icon_contacts"
         app:showAsAction="ifRoom"/>
 
 </menu>
