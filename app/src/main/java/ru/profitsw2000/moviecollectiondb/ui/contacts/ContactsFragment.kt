@@ -4,8 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ContentResolver
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
@@ -18,15 +20,20 @@ import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentContactsBinding
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentFavoriteBinding
 import ru.profitsw2000.moviecollectiondb.model.representation.Contact
+import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ContactsAdapter
 import ru.profitsw2000.moviecollectiondb.ui.adapters.FavoriteAdapter
+import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
+import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
+import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
-const val REQUEST_CODE = 42
+const val REQUEST_CODE_CONTACTS = 42
+const val REQUEST_CODE_CALL = 99
 
 class ContactsFragment : Fragment() {
     private var _binding: FragmentContactsBinding? = null
     private val binding get() = _binding!!
-    private val adapter: ContactsAdapter by lazy { ContactsAdapter() }
+    private var adapter: ContactsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,20 +46,40 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = ContactsAdapter(object : OnItemViewClickListener {
+            override fun onItemViewClick(phoneNumber: String) {
+                checkPermission(Manifest.permission.CALL_PHONE, REQUEST_CODE_CALL, phoneNumber)
+            }
+        })
         binding.contactsFragmentRecyclerview.adapter = adapter
-        checkPermission()
-        //adapter.setData()
+        checkPermission(Manifest.permission.READ_CONTACTS, REQUEST_CODE_CONTACTS,"")
     }
 
-    private fun checkPermission() {
+    private fun makePhoneCall(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_CALL);
+        intent.data = Uri.parse("tel:$phoneNumber")
+        startActivity(intent)
+    }
+
+    private fun checkPermission(requestType: String, requestCode: Int, phoneNumber: String) {
         context?.let {
             when {
-                ContextCompat.checkSelfPermission(it, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED -> {
+                ContextCompat.checkSelfPermission(it, requestType) == PackageManager.PERMISSION_GRANTED -> {
                     //Доступ к контактам на телефоне есть
-                    Toast.makeText(context, "Доступ есть", Toast.LENGTH_LONG).show()
-                    adapter.setData(getContacts())//getContacts()
-                    with(binding) {
-                        progressBar.hide()
+                    when (requestCode) {
+                        REQUEST_CODE_CONTACTS -> {
+                            adapter?.setData(getContacts())
+                            with(binding) {
+                                progressBar.hide()
+                            }
+                        }
+
+                        REQUEST_CODE_CALL -> {
+                            makePhoneCall(phoneNumber)
+                        }
+                        else -> {
+
+                        }
                     }
                 }
 
@@ -61,32 +88,43 @@ class ContactsFragment : Fragment() {
                     AlertDialog.Builder(it)
                         .setTitle("Доступ к контактам")
                         .setMessage("Жизненно необходим доступ к контактам.")
-                        .setPositiveButton("Предоставить доступ") { _, _ ->requestPermission()}
+                        .setPositiveButton("Предоставить доступ") { _, _ ->requestPermission(requestType, requestCode)}
                         .setNegativeButton("Не надо") { dialog, _ -> dialog.dismiss()}
                         .create()
                         .show()
-                    //Toast.makeText(context, "Доступ есть", Toast.LENGTH_LONG).show()
+                }
+
+                //Опционально: если нужно пояснение перед запросом разрешений
+                shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
+                    Toast.makeText(context,"Сообщение",Toast.LENGTH_LONG).show()
+                    AlertDialog.Builder(it)
+                        .setTitle("Доступ к звонкам")
+                        .setMessage("Жизненно необходим доступ к звонкам.")
+                        .setPositiveButton("Предоставить доступ") { _, _ ->requestPermission(requestType, requestCode)}
+                        .setNegativeButton("Не надо") { dialog, _ -> dialog.dismiss()}
+                        .create()
+                        .show()
                 }
 
                 else -> {
                     //Запрашиваем разрешение
-                    requestPermission()
+                    requestPermission(requestType, requestCode)
                 }
             }
         }
     }
 
-    private fun requestPermission() {
-        requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_CODE)
+    private fun requestPermission(requestType: String, requestCode: Int) {
+        requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), requestCode)
     }
 
     // Обратный вызов после получения разрешений от пользователя
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
-            REQUEST_CODE -> {
+            REQUEST_CODE_CONTACTS -> {
                 // Проверяем, дано ли пользователем разрешение по нашему запросу
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    adapter.setData(getContacts())//getContacts()
+                    adapter?.setData(getContacts())
                     with(binding) {
                         progressBar.hide()
                     }
@@ -97,6 +135,28 @@ class ContactsFragment : Fragment() {
                         AlertDialog.Builder(it)
                             .setTitle("Доступ к контактам")
                             .setMessage("Доступ отклонён, приложение не будет работать.")
+                            .setNegativeButton("Закрыть") { dialog, _ -> dialog.dismiss() }
+                            .create()
+                            .show()
+                    }
+                }
+                return
+            }
+
+            REQUEST_CODE_CALL -> {
+                // Проверяем, дано ли пользователем разрешение по нашему запросу
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    adapter?.setData(getContacts())
+                    with(binding) {
+                        progressBar.hide()
+                    }
+                    Toast.makeText(context, "Доступ предоставлен. Повторите попытку.", Toast.LENGTH_LONG).show()
+                } else {
+                    // Поясните пользователю, что звонка не будет, потому что доступ к звонкам не предоставлен
+                    context?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle("Доступ к звонкам")
+                            .setMessage("Доступ отклонён, звонка не будет.")
                             .setNegativeButton("Закрыть") { dialog, _ -> dialog.dismiss() }
                             .create()
                             .show()
@@ -170,6 +230,11 @@ class ContactsFragment : Fragment() {
         }
         return this
     }
+
+    interface OnItemViewClickListener {
+        fun onItemViewClick(phoneNumber: String)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = ContactsFragment()

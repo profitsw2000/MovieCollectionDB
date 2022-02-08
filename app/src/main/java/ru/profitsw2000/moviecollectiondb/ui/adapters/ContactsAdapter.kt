@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentContactsRecyclerItemBinding
 import ru.profitsw2000.moviecollectiondb.model.representation.Contact
+import ru.profitsw2000.moviecollectiondb.ui.contacts.ContactsFragment
+import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
-class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter (private val itemClickListener: ContactsFragment.OnItemViewClickListener)
+    : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     private var data: List<Contact> = arrayListOf()
     private lateinit var binding: FragmentContactsRecyclerItemBinding
@@ -40,6 +43,7 @@ class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
             with(binding){
                 contactName.text = contact.name
                 contactPhoneNumber.text = contact.phone_number[0]
+                root.setOnClickListener { itemClickListener.onItemViewClick(contact.phone_number[0]) }
             }
         }
     }
