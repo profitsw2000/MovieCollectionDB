@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import ru.profitsw2000.moviecollectiondb.ui.contacts.ContactsFragment
 import ru.profitsw2000.moviecollectiondb.ui.favorite.FavoriteFragment
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 import ru.profitsw2000.moviecollectiondb.ui.menu.SettingsFragment
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.menu_contacts-> {
+                openFragment(ContactsFragment.newInstance())
                 true
             }
 

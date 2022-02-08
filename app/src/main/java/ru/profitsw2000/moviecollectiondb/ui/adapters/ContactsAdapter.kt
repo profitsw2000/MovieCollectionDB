@@ -5,16 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentContactsRecyclerItemBinding
-import ru.profitsw2000.moviecollectiondb.databinding.FragmentFavoriteRecyclerItemBinding
-import ru.profitsw2000.moviecollectiondb.model.representation.Contacts
-import ru.profitsw2000.moviecollectiondb.room.FavoriteEntity
+import ru.profitsw2000.moviecollectiondb.model.representation.Contact
 
 class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
-    private var data: List<Contacts> = arrayListOf()
+    private var data: List<Contact> = arrayListOf()
     private lateinit var binding: FragmentContactsRecyclerItemBinding
 
-    fun setData(data: List<Contacts>) {
+    fun setData(data: List<Contact>) {
         this.data = data
         notifyDataSetChanged()
     }
@@ -38,10 +36,10 @@ class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(contacts: Contacts) {
+        fun bind(contact: Contact) {
             with(binding){
-                contactName.text = contacts.name
-                contactPhoneNumber.text = contacts.phone_number[0]
+                contactName.text = contact.name
+                contactPhoneNumber.text = contact.phone_number[0]
             }
         }
     }
