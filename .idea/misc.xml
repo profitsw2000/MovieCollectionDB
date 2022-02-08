@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/PROJECTS/Android_prj/GeekBrains/MovieCollectionDB/app/src/main/res/layout/fragment_contacts.xml" value="0.14270833333333333" />
+        <entry key="..\:/PROJECTS/Android_prj/GeekBrains/MovieCollectionDB/app/src/main/res/layout/fragment_contacts_recycler_item.xml" value="0.72" />
         <entry key="..\:/PROJECTS/Android_prj/GeekBrains/MovieCollectionDB/app/src/main/res/layout/fragment_description.xml" value="0.37220843672456577" />
         <entry key="..\:/PROJECTS/Android_prj/GeekBrains/MovieCollectionDB/app/src/main/res/layout/fragment_favorite.xml" value="0.14270833333333333" />
         <entry key="..\:/PROJECTS/Android_prj/GeekBrains/MovieCollectionDB/app/src/main/res/layout/fragment_favorite_recycler_item.xml" value="0.6" />
