@@ -16,16 +16,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.databinding.FragmentContactsBinding
-import ru.profitsw2000.moviecollectiondb.databinding.FragmentFavoriteBinding
 import ru.profitsw2000.moviecollectiondb.model.representation.Contact
-import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ContactsAdapter
-import ru.profitsw2000.moviecollectiondb.ui.adapters.FavoriteAdapter
-import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
-import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
-import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
 
 const val REQUEST_CODE_CONTACTS = 42
 const val REQUEST_CODE_CALL = 99

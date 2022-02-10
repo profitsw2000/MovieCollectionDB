@@ -18,10 +18,12 @@ import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.R
+import ru.profitsw2000.moviecollectiondb.model.representation.Category
 import ru.profitsw2000.moviecollectiondb.receivers.ConnectivityReceiver
 import ru.profitsw2000.moviecollectiondb.ui.adapters.ParentAdapter
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionFragment
 import ru.profitsw2000.moviecollectiondb.ui.menu.SHOW_ADULT_KEY
+import ru.profitsw2000.moviecollectiondb.ui.menu.SHOW_GENRES
 
 class MainFragment : Fragment() {
 
@@ -62,6 +64,16 @@ class MainFragment : Fragment() {
         viewModel.getMovieInfo(includeAdult)
     }
 
+    private fun getCategories(data: List<Category>, genresCode: Int): List<Category> {
+        var visibleCategories: MutableList<Category> = mutableListOf()
+
+        for(i in 0..data.size) {
+            if (((1 shl i) and (genresCode)) != 0) visibleCategories.add(data.get(i))
+        }
+
+        return visibleCategories
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -90,7 +102,14 @@ class MainFragment : Fragment() {
                         }
                     }
                 }).apply {
-                    setCategories(appState.categoriesData)
+
+                    var genresCode = 0
+                    activity?.let {
+                        val sharedPref = it.getPreferences(Context.MODE_PRIVATE)
+                        genresCode = sharedPref.getInt(SHOW_GENRES, 0x7FFFF)
+                    }
+                    setCategories(getCategories(appState.categoriesData, genresCode))
+                    //setCategories(appState.categoriesData)
                 }
                 mainFragmentRecyclerView.adapter = adapter
                 mainFragmentRecyclerView.show()
