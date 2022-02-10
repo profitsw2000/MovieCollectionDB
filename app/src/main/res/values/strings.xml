@@ -33,4 +33,24 @@
     <string name="save_note_button_text">Save</string>
     <string name="notes_menu_item">Notes</string>
     <string name="contacts_menu_item">Contacts</string>
+    <string name="show_genres_text">Показывать жанры:</string>
+    <string name="action_movie_box_text">Боевик</string>
+    <string name="adventures_box_text">Приключения</string>
+    <string name="cartoons_box_text">Мультфильмы</string>
+    <string name="comedy_box_text">Комедии</string>
+    <string name="criminal_box_text">Криминал</string>
+    <string name="documentary_box_text">Документальный</string>
+    <string name="drama_box_text">Драма</string>
+    <string name="family__box_text">Семейный</string>
+    <string name="fantasy_box_text">Фэнтези</string>
+    <string name="history_box_text">История</string>
+    <string name="horror_box_text">Ужасы</string>
+    <string name="music_box_text">Музыка</string>
+    <string name="detective_box_text">Детектив</string>
+    <string name="melodrama_box_text">Мелодрама</string>
+    <string name="fantastic_box_text">Фантастика</string>
+    <string name="telefilm_box_text">Телевизионный фильм</string>
+    <string name="thriller_box_text">Триллер</string>
+    <string name="military_box_text">Военный</string>
+    <string name="western_box_text">Вестерн</string>
 </resources>

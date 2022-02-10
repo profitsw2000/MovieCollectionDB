@@ -30,4 +30,213 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_title" />
 
+    <TextView
+        android:id="@+id/label_show_genres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:layout_marginTop="@dimen/settings_switch_padding"
+        android:text="@string/show_genres_text"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adult_switch"
+        app:layout_constraintBottom_toTopOf="@+id/box_action_movie"/>
+
+    <CheckBox
+        android:id="@+id/box_action_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:layout_marginTop="8dp"
+        android:text="@string/action_movie_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_show_genres"
+        app:layout_constraintBottom_toTopOf="@+id/box_adventures" />
+
+    <CheckBox
+        android:id="@+id/box_adventures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/adventures_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_action_movie"
+        app:layout_constraintBottom_toTopOf="@+id/box_cartoons" />
+
+    <CheckBox
+        android:id="@+id/box_cartoons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/cartoons_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_adventures"
+        app:layout_constraintBottom_toTopOf="@+id/box_comedy" />
+
+    <CheckBox
+        android:id="@+id/box_comedy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/comedy_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_cartoons" />
+
+    <CheckBox
+        android:id="@+id/box_criminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/criminal_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_comedy"
+        app:layout_constraintBottom_toTopOf="@+id/box_documentary" />
+
+    <CheckBox
+        android:id="@+id/box_documentary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/documentary_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_criminal"
+        app:layout_constraintBottom_toTopOf="@+id/box_drama" />
+
+    <CheckBox
+        android:id="@+id/box_drama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/drama_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_documentary"
+        app:layout_constraintBottom_toTopOf="@+id/box_familie_movie" />
+
+    <CheckBox
+        android:id="@+id/box_familie_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/family__box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_drama"
+        app:layout_constraintBottom_toTopOf="@+id/box_fantasy" />
+
+    <CheckBox
+        android:id="@+id/box_fantasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/fantasy_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_familie_movie"
+        app:layout_constraintBottom_toTopOf="@+id/box_history"/>
+
+    <CheckBox
+        android:id="@+id/box_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/history_box_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box_fantasy" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_half"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <CheckBox
+        android:id="@+id/box_horror"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:layout_marginTop="8dp"
+        android:text="@string/horror_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@id/label_show_genres"
+        app:layout_constraintBottom_toTopOf="@+id/box_music" />
+
+    <CheckBox
+        android:id="@+id/box_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/music_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_horror"
+        app:layout_constraintBottom_toTopOf="@+id/box_detective" />
+
+    <CheckBox
+        android:id="@+id/box_detective"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/detective_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_music"
+        app:layout_constraintBottom_toTopOf="@+id/box_melodrama" />
+
+    <CheckBox
+        android:id="@+id/box_melodrama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/melodrama_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_detective"
+        app:layout_constraintBottom_toTopOf="@+id/box_fantastic" />
+
+    <CheckBox
+        android:id="@+id/box_fantastic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/fantastic_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_melodrama"
+        app:layout_constraintBottom_toTopOf="@+id/box_telefilm" />
+
+    <CheckBox
+        android:id="@+id/box_telefilm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/telefilm_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_fantastic"
+        app:layout_constraintBottom_toTopOf="@+id/box_thriller" />
+
+    <CheckBox
+        android:id="@+id/box_thriller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/thriller_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_telefilm"
+        app:layout_constraintBottom_toTopOf="@+id/box_military" />
+
+    <CheckBox
+        android:id="@+id/box_military"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/military_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_thriller"
+        app:layout_constraintBottom_toTopOf="@+id/box_western" />
+
+    <CheckBox
+        android:id="@+id/box_western"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_switch_padding"
+        android:text="@string/western_box_text"
+        app:layout_constraintStart_toStartOf="@id/guideline_half"
+        app:layout_constraintTop_toBottomOf="@+id/box_military" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
