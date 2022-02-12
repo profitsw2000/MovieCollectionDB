@@ -53,4 +53,6 @@
     <string name="thriller_box_text">Триллер</string>
     <string name="military_box_text">Военный</string>
     <string name="western_box_text">Вестерн</string>
+    <!--Google API Key-->
+    <string name="google_map_key" translatable="false">AIzaSyDioVBBRzK7vgdMzhUUza5zRHXmdfhs7G4</string>
 </resources>
