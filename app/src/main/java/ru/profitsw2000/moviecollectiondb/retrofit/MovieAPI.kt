@@ -16,7 +16,7 @@ interface MovieAPI {
         @Query("language") language: String
     ): Call<DescriptionDTO>
 
-    @GET("/search/person")
+    @GET("search/person")
     fun getPeople(
         @Query("api_key") api_key: String,
         @Query("query") language: String

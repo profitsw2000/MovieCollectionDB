@@ -36,7 +36,21 @@
             android:text="Search" />
     </LinearLayout>
 
-    <include
-        android:id="@+id/map_lay"
-        layout="@layout/fragment_google_maps" />
+    <LinearLayout
+        android:id="@+id/mapLinear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/map_lay"
+            layout="@layout/fragment_google_maps" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/containerForNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"/>
 </LinearLayout>

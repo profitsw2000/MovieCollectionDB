@@ -24,6 +24,5 @@ class NoteViewModel (private val noteRepository: LocalRepository = LocalReposito
     fun getMovieNotes() {
         noteLiveData.value = AppState.Loading
         viewModelScope.launch { noteLiveData.postValue(AppState.NotesSuccess(noteRepository.getAllNotes()))  }
-        //noteLiveData.value = AppState.Error("Nothing")
     }
 }

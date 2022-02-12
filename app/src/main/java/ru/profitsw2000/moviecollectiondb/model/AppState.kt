@@ -10,6 +10,7 @@ sealed class AppState {
     data class MovieSuccess(val movie: Movie) : AppState()
     data class NotesSuccess(val noteList: List<NoteEntity>) : AppState()
     data class FavoriteSuccess(val favoriteList: List<FavoriteEntity>) : AppState()
+    data class ActorSuccess(val placeOfBirth: List<Int>) : AppState()
     data class Error(val message: String) : AppState()
     object Loading : AppState()
 }

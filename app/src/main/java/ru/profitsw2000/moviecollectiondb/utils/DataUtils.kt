@@ -3,6 +3,7 @@ package ru.profitsw2000.moviecollectiondb.utils
 import ru.profitsw2000.moviecollectiondb.R
 import ru.profitsw2000.moviecollectiondb.model.representation.Movie
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
+import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.PeopleDTO
 import ru.profitsw2000.moviecollectiondb.room.FavoriteEntity
 import ru.profitsw2000.moviecollectiondb.room.NoteEntity
 
@@ -26,6 +27,26 @@ fun convertDescriptionDTOToModel(descriptionDTO: DescriptionDTO) : Movie {
         return Movie(title!!, genresString, runtime!!, vote_average!!,
             budget!!, revenue!!, release_date!!, overview!!, poster_path!!,
             id!!)
+    }
+}
+
+fun convertPeopleDTOToModel(peopleDTO: PeopleDTO) : List<Int> {
+
+    var idList: ArrayList<Int> = arrayListOf()
+    var i = peopleDTO.results?.size
+
+    //get string with id's of peoples from List of strings
+    if (i != null) {
+        var j = 0
+        while (i > 0) {
+            idList.add(peopleDTO.results?.get(j)?.id ?: -1)
+            i--
+            j++
+        }
+    }
+
+    with(peopleDTO){
+        return idList
     }
 }
 

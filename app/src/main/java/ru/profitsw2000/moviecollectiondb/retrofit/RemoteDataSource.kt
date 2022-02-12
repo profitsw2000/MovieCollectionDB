@@ -22,7 +22,7 @@ class RemoteDataSource {
     }
 
     fun getActorSearchResult(personName: String, callback: Callback<PeopleDTO>) {
-        movieAPI.getPeople(BuildConfig.MOVIE_API_KEY, personName)
+        movieAPI.getPeople(BuildConfig.MOVIE_API_KEY, personName).enqueue(callback)
     }
 
 }

@@ -6,5 +6,5 @@ import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.PeopleDTO
 
 interface DescriptionRepository {
     fun getMovieDescriptionFromServer(id: Int, callback: retrofit2.Callback<DescriptionDTO>)
-    fun getPeoplesFromServer(personName: String, callback: Callback<PeopleDTO>)
+    fun getPeoplesFromServer(personName: String, callback: retrofit2.Callback<PeopleDTO>)
 }

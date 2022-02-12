@@ -8,6 +8,7 @@ import ru.profitsw2000.moviecollectiondb.room.NoteDAO
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionViewModel
 import ru.profitsw2000.moviecollectiondb.ui.favorite.FavoriteViewModel
 import ru.profitsw2000.moviecollectiondb.ui.main.MainViewModel
+import ru.profitsw2000.moviecollectiondb.ui.maps.MapsViewModel
 import ru.profitsw2000.moviecollectiondb.ui.notes.NoteViewModel
 
 val appModule = module {
@@ -21,4 +22,5 @@ val appModule = module {
     viewModel { DescriptionViewModel(get()) }
     viewModel { NoteViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
+    viewModel { MapsViewModel(get()) }
 }
