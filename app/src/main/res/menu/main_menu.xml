@@ -32,4 +32,10 @@
         android:icon="@drawable/icon_contact"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/menu_maps"
+        android:title="@string/map_menu_item"
+        android:icon="@drawable/icon_map"
+        app:showAsAction="ifRoom"/>
+
 </menu>

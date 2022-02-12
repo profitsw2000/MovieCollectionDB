@@ -55,4 +55,5 @@
     <string name="western_box_text">Вестерн</string>
     <!--Google API Key-->
     <string name="google_map_key" translatable="false">AIzaSyDioVBBRzK7vgdMzhUUza5zRHXmdfhs7G4</string>
+    <string name="map_menu_item">Map</string>
 </resources>

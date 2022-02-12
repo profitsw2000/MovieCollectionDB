@@ -22,9 +22,9 @@ class MapsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val callback = OnMapReadyCallback { googleMap ->
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val spb = LatLng(59.563178, 30.188478)
+        googleMap.addMarker(MarkerOptions().position(spb).title("Marker in Saint-Petersburg"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(spb))
     }
 
     override fun onCreateView(
@@ -40,5 +40,9 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+    }
+
+    companion object {
+        fun newInstance() = MapsFragment()
     }
 }
