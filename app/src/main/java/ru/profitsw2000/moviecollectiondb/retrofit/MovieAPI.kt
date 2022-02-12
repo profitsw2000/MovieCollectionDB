@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
+import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.ActorDTO
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.PeopleDTO
 
@@ -21,4 +22,10 @@ interface MovieAPI {
         @Query("api_key") api_key: String,
         @Query("query") language: String
     ): Call<PeopleDTO>
+
+    @GET("person/{person_id}")
+    fun getActor(
+        @Path("person_id") id: Int,
+        @Query("api_key") api_key: String
+    ): Call<ActorDTO>
 }

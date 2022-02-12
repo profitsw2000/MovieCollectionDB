@@ -33,11 +33,9 @@ class MapsViewModel(private val descriptionRepositoryImpl: DescriptionRepository
         descriptionRepositoryImpl.getPeoplesFromServer(personName, callBack)
     }
 
-    private val callBack = object :
-        Callback<PeopleDTO> {
-        override fun onResponse(call: Call<PeopleDTO>, response:
-        Response<PeopleDTO>
-        ) {
+    private val callBack = object : Callback<PeopleDTO> {
+
+        override fun onResponse(call: Call<PeopleDTO>, response: Response<PeopleDTO>) {
             val serverResponse: PeopleDTO? = response.body()
             localLiveData.postValue(
                 if (response.isSuccessful && serverResponse != null) {
