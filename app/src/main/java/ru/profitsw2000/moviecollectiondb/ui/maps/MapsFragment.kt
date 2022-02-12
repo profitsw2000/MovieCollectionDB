@@ -22,7 +22,7 @@ class MapsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val callback = OnMapReadyCallback { googleMap ->
-        val spb = LatLng(59.563178, 30.188478)
+        val spb = LatLng(59.9417277, 30.0937839)
         googleMap.addMarker(MarkerOptions().position(spb).title("Marker in Saint-Petersburg"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(spb))
     }
@@ -40,6 +40,11 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+        with(binding){
+            searchActor.setOnClickListener {
+
+            }
+        }
     }
 
     companion object {

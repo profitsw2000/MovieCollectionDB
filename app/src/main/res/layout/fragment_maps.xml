@@ -9,10 +9,10 @@
         android:id="@+id/label_search_actor_birth_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_margin="6dp"
+        android:textSize="@dimen/map_label_text_size"
+        android:layout_margin="@dimen/map_label_margin"
         android:textColor="@color/black"
-        android:text="Поиск места рождения актёра." />
+        android:text="@string/label_search_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,8 +25,8 @@
             android:layout_weight="3"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Введите имя или фамилию актёра"
-            android:textSize="16sp"/>
+            android:hint="@string/input_actor_search_text"
+            android:textSize="@dimen/search_hint_text_size"/>
 
         <Button
             android:id="@+id/buttonSearch"

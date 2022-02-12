@@ -20,4 +20,7 @@
     <dimen name="settings_switch_padding">16dp</dimen>
     <dimen name="note_label_text_size">20sp</dimen>
     <dimen name="note_recycler_margin">5dp</dimen>
+    <dimen name="map_label_margin">6dp</dimen>
+    <dimen name="map_label_text_size">20sp</dimen>
+    <dimen name="search_hint_text_size">16sp</dimen>
 </resources>

@@ -56,4 +56,6 @@
     <!--Google API Key-->
     <string name="google_map_key" translatable="false">AIzaSyDioVBBRzK7vgdMzhUUza5zRHXmdfhs7G4</string>
     <string name="map_menu_item">Map</string>
+    <string name="label_search_text">Поиск места рождения актёра.</string>
+    <string name="input_actor_search_text">Введите имя или фамилию актёра</string>
 </resources>
