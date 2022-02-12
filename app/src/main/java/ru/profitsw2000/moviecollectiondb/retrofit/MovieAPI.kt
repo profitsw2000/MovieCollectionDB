@@ -6,6 +6,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.DescriptionDTO
+import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.PeopleDTO
 
 interface MovieAPI {
     @GET("movie/{movie_id}")
@@ -14,4 +15,10 @@ interface MovieAPI {
         @Query("api_key") api_key: String,
         @Query("language") language: String
     ): Call<DescriptionDTO>
+
+    @GET("/search/person")
+    fun getPeople(
+        @Query("api_key") api_key: String,
+        @Query("query") language: String
+    ): Call<PeopleDTO>
 }
