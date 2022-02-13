@@ -1,14 +1,19 @@
 package ru.profitsw2000.moviecollectiondb.ui.maps
 
+import android.app.AlertDialog
 import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.marginBottom
+import androidx.core.view.setPadding
 import androidx.lifecycle.Observer
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,16 +29,20 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.profitsw2000.moviecollectiondb.model.AppState
 import ru.profitsw2000.moviecollectiondb.model.representation.Actor
 import ru.profitsw2000.moviecollectiondb.model.representation_tmdb.ActorDTO
+import java.io.IOException
 
 class MapsFragment : Fragment() {
 
     private val viewModel: MapsViewModel by viewModel()
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var map: GoogleMap
     private lateinit var input: String
     private var finded = false
 
     private val callback = OnMapReadyCallback { googleMap ->
+        map = googleMap
+
         val spb = LatLng(59.9417277, 30.0937839)
         googleMap.addMarker(MarkerOptions().position(spb).title("Marker in Saint-Petersburg"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(spb))
@@ -74,7 +83,7 @@ class MapsFragment : Fragment() {
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Error -> {
-
+                //showDialog("Error",appState.message)
             }
             AppState.Loading -> {
 
@@ -84,7 +93,7 @@ class MapsFragment : Fragment() {
                 var actorName = ""
 
                 for (name in actor.also_known_as!!){
-                    if (name.contains("$input ",true) || name.contains(" $input",true)){
+                    if (name.contains(input,true)){
                         actorName = name
                         if (!finded) {
                             binding.containerForNames.removeAllViewsInLayout()
@@ -102,15 +111,27 @@ class MapsFragment : Fragment() {
     }
 
     private fun addView(context: Context, actor: Actor) {
-        binding.containerForNames.addView(AppCompatTextView(context).apply {
+        binding.containerForNames.addView(TextView(context).apply {
             if(finded) {
                 text = actor.name
-                textSize = 14f
+                textSize = 20f
+                setPadding(8,8,8,8)
+                setOnClickListener{
+                    with(binding){
+                        mapLinear.show()
+                        containerForNames.hide()
+                        containerForNames.removeAllViewsInLayout()
+                    }
+                    initSearchByAddress(actor.birthPlace!!)
+
+                    //text = actor.birthPlace
+                }
             }
             else{
                 binding.containerForNames.removeAllViewsInLayout()
                 text = "Person not found"
-                textSize = 14f
+                setPadding(8,8,8,8)
+                textSize = 20f
             }
         })
     }
@@ -127,6 +148,48 @@ class MapsFragment : Fragment() {
             visibility = View.GONE
         }
         return this
+    }
+
+    private fun initSearchByAddress(birthPlace: String) {
+        val geoCoder = Geocoder(context)
+        Thread {
+            try {
+                val addresses = geoCoder.getFromLocationName(birthPlace, 1)
+                if (addresses.size > 0) {
+                    goToAddress(addresses, binding.root, birthPlace)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }.start()
+    }
+
+    private fun goToAddress(addresses: List<Address>, view: View, birthPlace: String) {
+        val location = LatLng(addresses[0].latitude,addresses[0].longitude)
+        view.post {
+            setMarker(location, birthPlace)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom( location,8f))
+        }
+    }
+
+    private fun setMarker(location: LatLng, place: String) {
+        map.addMarker(
+            MarkerOptions()
+                .position(location)
+                .title(place)
+        )
+    }
+
+    private fun showDialog(title: String, message: String) {
+        activity?.let {
+            AlertDialog.Builder(it)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeButton(getString(R.string.dialog_button_text_close)) {
+                        dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
+        }
     }
 
     companion object {

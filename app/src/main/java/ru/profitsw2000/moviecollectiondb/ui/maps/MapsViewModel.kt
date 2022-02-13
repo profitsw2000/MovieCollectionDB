@@ -22,6 +22,7 @@ class MapsViewModel(private val descriptionRepositoryImpl: DescriptionRepository
                         DescriptionRepositoryImpl(RemoteDataSource())
 ) : ViewModel() {
     private val localLiveData: MutableLiveData<AppState> = MutableLiveData()
+    private val loaded = false
     val mapLiveData: LiveData<AppState>
         get() {
         return localLiveData
