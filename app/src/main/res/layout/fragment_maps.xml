@@ -36,6 +36,13 @@
             android:text="Search" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        android:visibility="invisible" />
+
     <LinearLayout
         android:id="@+id/mapLinear"
         android:layout_width="wrap_content"

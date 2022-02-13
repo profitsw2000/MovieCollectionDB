@@ -84,11 +84,22 @@ class MapsFragment : Fragment() {
         when (appState) {
             is AppState.Error -> {
                 //showDialog("Error",appState.message)
+                with(binding){
+                    progressBar.hide()
+                }
             }
             AppState.Loading -> {
-
+                with(binding){
+                    mapLinear.hide()
+                    containerForNames.hide()
+                    progressBar.show()
+                }
             }
             is AppState.ActorSuccess -> {
+                with(binding){
+                    containerForNames.show()
+                    progressBar.hide()
+                }
                 val actor = appState.actorDetails
                 var actorName = ""
 
