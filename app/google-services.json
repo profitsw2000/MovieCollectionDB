@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "564562381760",
+    "project_id": "moviecollectiondb",
+    "storage_bucket": "moviecollectiondb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564562381760:android:24a50b8e1d97dbcf239625",
+        "android_client_info": {
+          "package_name": "ru.profitsw2000.moviecollectiondb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564562381760-3grt2brmb9bks31r6lm725igallco8c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlTSOy9wvWOwBLwdTBpicM4Kh9AuWCNz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564562381760-3grt2brmb9bks31r6lm725igallco8c2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
