@@ -3,9 +3,14 @@ package ru.profitsw2000.moviecollectiondb
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.messaging.FirebaseMessaging
 import ru.profitsw2000.moviecollectiondb.ui.contacts.ContactsFragment
 import ru.profitsw2000.moviecollectiondb.ui.favorite.FavoriteFragment
 import ru.profitsw2000.moviecollectiondb.ui.main.MainFragment
@@ -18,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            Log.d("Token", it)
+        //Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, MainFragment.newInstance())
