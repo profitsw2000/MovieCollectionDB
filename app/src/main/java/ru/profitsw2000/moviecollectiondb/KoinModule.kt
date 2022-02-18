@@ -4,7 +4,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import ru.profitsw2000.moviecollectiondb.model.repository.*
 import ru.profitsw2000.moviecollectiondb.retrofit.RemoteDataSource
-import ru.profitsw2000.moviecollectiondb.room.NoteDAO
 import ru.profitsw2000.moviecollectiondb.ui.description.DescriptionViewModel
 import ru.profitsw2000.moviecollectiondb.ui.favorite.FavoriteViewModel
 import ru.profitsw2000.moviecollectiondb.ui.main.MainViewModel
