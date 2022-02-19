@@ -7,6 +7,12 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('appkey.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     compileSdk 31
 
@@ -29,11 +35,12 @@ android {
     }
 
     signingConfigs {
+
         release {
             storeFile file("mcdb_app_key.jks")
-            storePassword '456789'
-            keyAlias 'app_key'
-            keyPassword '456789'
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
         }
     }
 

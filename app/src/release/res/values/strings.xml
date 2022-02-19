@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="buildVariant">Build release</string>
+    <string name="buildVariant">Release Version</string>
 </resources>
