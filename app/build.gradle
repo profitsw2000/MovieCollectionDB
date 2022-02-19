@@ -28,6 +28,15 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("mcdb_app_key.jks")
+            storePassword '456789'
+            keyAlias 'app_key'
+            keyPassword '456789'
+        }
+    }
+
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
@@ -37,6 +46,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -51,8 +61,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-
-
     }
     kotlinOptions {
         jvmTarget = '1.8'
